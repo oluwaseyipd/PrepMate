@@ -1,14 +1,14 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-// import Hero from '../components/Hero';
-// import Footer from '../components/Footer';
+import ContactBody from '../components/ContactBody';
+import Footer from '../components/Footer';
 
 const Contact = () => {
   return (
     <div>
       <Navbar />
-      {/* <Hero />
-      <Footer /> */}
+      <ContactBody />
+      <Footer />
     </div>
   );
 };
