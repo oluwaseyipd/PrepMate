@@ -61,36 +61,46 @@ export const userTestimony = [
   },
 ];
 
-export  const faqs = [
+export const faqs = [
   {
     question: "What is Campty?",
-    answer: "Campty is a camping service that helps you find and book the best camping spots."
+    answer:
+      "Campty is a camping service that helps you find and book the best camping spots.",
   },
   {
     question: "How to book tickets?",
-    answer: "You can book tickets directly through our website by selecting a destination and following the booking steps."
+    answer:
+      "You can book tickets directly through our website by selecting a destination and following the booking steps.",
   },
   {
     question: "What kind of service will I get?",
-    answer: "We offer complete camping solutions, including guides, safety measures, and convenient booking."
-  }
+    answer:
+      "We offer complete camping solutions, including guides, safety measures, and convenient booking.",
+  },
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const team = [
+  {
+    name: "Sam Monic",
+    role: "Founder",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
+  },
+  {
+    name: "Rams Lesli",
+    role: "Sales Executive",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
+  },
+  {
+    name: "Harshita Patel",
+    role: "Co-Founder & CEO",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
+  },
+  {
+    name: "Alexa Kimberly",
+    role: "Lead Designer",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
+  },
+];
 
 export const features = [
   {
@@ -131,7 +141,6 @@ export const features = [
   },
 ];
 
-
 // Footer Links
 
 export const navigation = [
@@ -141,7 +150,6 @@ export const navigation = [
   { label: "Sign In", href: "/signin" },
   { label: "Register", href: "/register" },
 ];
-
 
 export const communityLinks = [
   { href: "#", text: "Events" },
@@ -153,6 +161,6 @@ export const communityLinks = [
 
 export const socialLinks = [
   { href: "#", icon: xtwitter, alt: "x-twitter" },
-  { href: "#", icon: instagram, alt: "instagram"},
+  { href: "#", icon: instagram, alt: "instagram" },
   { href: "#", icon: linkedin, alt: "linkedin" },
 ];

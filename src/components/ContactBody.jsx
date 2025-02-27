@@ -33,22 +33,22 @@ const ContactBody = () => {
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full md:w-1/2 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full md:w-1/2 px-4 py-2 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 "
                 />
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full md:w-1/2 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full md:w-1/2 px-4 py-2 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 "
                 />
               </div>
               <input
                 type="text"
                 placeholder="Subject"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border-2 border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 "
               />
               <textarea
                 placeholder="Message"
-                className="w-full px-4 py-2 border rounded-lg h-32 focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border-2 border-blue-200 rounded-lg h-32 focus:ring-2 focus:ring-blue-500 "
               ></textarea>
               <div className="flex items-center gap-2">
                 <input type="checkbox" className="cursor-pointer" />
@@ -101,7 +101,7 @@ const ContactBody = () => {
             </div>
 
             {/* Social Media Links */}
-            <div className="flex flex-col mt-12">
+            <div className="flex flex-col md:flex-row justify-between mt-12">
               <h4 className="text-2xl text-black font-bold mb-4">Social Media :</h4>
               <div className="flex space-x-4">
                 <FaFacebook className="text-blue-600 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
@@ -115,35 +115,22 @@ const ContactBody = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-start mt-20">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-start mt-16 md:mt-30">
           {/* Left Side - Subscription Form */}
           <div className="relative space-y-6 flex-1">
-            <div className="absolute -top-3 -right-0 w-16 h-16">
+            <div className="absolute -top-2 md:-top-3 -right-5 md:right-20 w-16 h-16">
               <img src={shape1} alt="Lot Of Choices" className="w-32" />
             </div>
             <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
               Got A Question For Campty?
             </h2>
             <p className="text-gray-500 text-lg md:text-xl max-w-md">
-              If there are questions you want to ask, we will answer all your questions.
+            Maybe your question has already been answered, check this out.
             </p>
-            <div className="flex border border-black rounded-full overflow-hidden">
-              <input
-                type="email"
-                placeholder="Enter Your Email"
-                className="flex-1 px-4 py-2 text-lg text-gray-500 focus:outline-none"
-              />
-              <button className="bg-black text-white px-6 py-2 md:px-10 md:py-5 rounded-full hover:bg-gray-800 transition cursor-pointer">
-                Submit
-              </button>
-            </div>
           </div>
 
           {/* Right Side - FAQ List */}
-          <div className="flex-1 space-y-4">
-            <h3 className="text-xl md:text-2xl mt-6 md:mt-0 font-medium text-gray-900">
-              Maybe your question has already been answered, check this out.
-            </h3>
+          <div className="w-full md:flex-1 space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}

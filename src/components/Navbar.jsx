@@ -35,13 +35,13 @@ const Navbar = () => {
 
           <div className="hidden lg:flex justify-center space-x-4 items-center">
             <Link
-              to="/register"
+              to="/signin"
               className="py-3 px-5 border rounded-3xl bg-transparent border-black text-black hover:bg-black hover:text-white"
             >
               Sign In
             </Link>
             <Link
-              to="/signin"
+              to="/register"
               className="py-3 px-5 border rounded-3xl bg-black text-white hover:bg-white hover:text-black"
             >
               Get Started
