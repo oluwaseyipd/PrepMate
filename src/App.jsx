@@ -1,24 +1,35 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
-// Pages
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import SignIn from './pages/SignIn';
-import Register from './pages/Register';
+// Public Pages
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
-// Dashboard
-import Overview from './pages/user-dashboard/Overview';
-import Sidebar from "./components/user-dashboard/Sidebar";
+// Authentication Pages
+import SignIn from "./pages/authentication/SignIn";
+import Register from "./pages/authentication/Register";
+import ForgotPassword from "./pages/authentication/ForgotPassword";
+import ResetPassword from "./pages/authentication/ResetPassword";
+import TwoStepVerification from "./pages/authentication/TwoStepVerification";
+import VerifyEmail from "./pages/authentication/VerifyEmail";
+
+// Dashboards Pages
+import Overview from "./pages/userDashboard/Overview";
+import Courses from "./pages/userDashboard/Courses";
+import Analytics from "./pages/userDashboard/Analytics";
+import Resources from "./pages/userDashboard/Resources";
+import AccountSettings from "./pages/userDashboard/AccountSettings";
+import Tests from "./pages/userDashboard/Tests";
+
+// Layout Pages
+import UserLayout from "./layouts/UserLayout";
 
 // Components
 import Loader from "./components/Loader";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./pages/NotFound";
-// import WhatsAppButton from "./components/WhatsAppButton";
-// import MetaTags from "./components/MetaTags";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,34 +40,37 @@ function App() {
 
   return (
     <>
-      {/* <MetaTags /> */}
       {isLoading ? (
         <Loader />
       ) : (
         <Router>
           <ScrollToTop />
-          <div>
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/contact" element={<Contact />} />
-    <Route path="/signin" element={<SignIn />} />
-    <Route path="/register" element={<Register />} />
-    <Route
-      path="/dashboard/*"
-      element={
-        <div className="flex-1">
-          <Sidebar />
-          <Overview />
-        </div>
-      }
-    />
-    <Route path="*" element={<NotFound />} />
-  </Routes>
-  {/* <WhatsAppButton phone="+2348112345678" message="Hello! I need help with PrepMate." /> */}
-</div>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/two-step-verification" element={<TwoStepVerification />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
 
-          
+            {/* User Dashboard Routes */}
+            <Route path="/dashboard/*" element={<UserLayout />}>
+              <Route index element={<Overview />} />
+              <Route path="overview" element={<Overview />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="resources" element={<Resources />} />
+              <Route path="settings" element={<AccountSettings />} />
+              <Route path="tests" element={<Tests />} />
+            </Route>
+
+            {/* Not Found Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </Router>
       )}
     </>

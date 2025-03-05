@@ -1,40 +1,50 @@
-import { Home, LayoutDashboard, BookOpen, Settings, MessageSquare, Clock, CheckCircle, FileText } from "lucide-react";
+import { title } from "framer-motion/client";
+import { LayoutDashboard, BookOpen, Bookmark, Clock, CheckCircle, FileText, BarChart } from "lucide-react";
+import user1 from "../assets/images/user1.jpeg";
+
 
 
 
 // Sidebar Navigation
-export const navItems = [
-    { name: "Overview", icon: <LayoutDashboard />, link: "/dashboard" },
-    { name: "My Tests", icon: <BookOpen />, link: "/dashboard/tests" },
-    { name: "Performance", icon: <Home />, link: "/dashboard/performance" },
-    { name: "Messages", icon: <MessageSquare />, link: "/dashboard/messages" },
-    { name: "Settings", icon: <Settings />, link: "/dashboard/settings" },
-  ];
+export   const navItems = [
+  { name: 'Overview', icon: LayoutDashboard, path: '/dashboard/overview' },
+  { name: 'Analytics', icon: BarChart, path: '/dashboard/analytics' },
+  { name: 'Courses', icon: BookOpen, path: '/dashboard/courses' },
+  { name: 'Resources', icon: Bookmark, path: '/dashboard/resources' },
+];
 
-  // Quick Stats
- export  const stats = [
-    { icon: <Clock className="w-10 h-10 text-blue-600" />, label: "Total Tests Taken", value: 5 },
-    { icon: <CheckCircle className="w-10 h-10 text-green-600" />, label: "Passed Tests", value: 3 },
-    { icon: <FileText className="w-10 h-10 text-yellow-600" />, label: "Pending Tests", value: 2 },
-  ];
+// Profile Settings Navigation
+export const profileSettingsNav = [
+  { name: 'My Details', path: 'details' },
+  { name: 'Password', path: 'password' },
+  { name: 'Notification', path: 'notification' },
+];
 
-  export const recentTests = [
-    {
-      subject: "Mathematics Practice Test",
-      date: "Jan 12, 2025",
-      duration: "30 mins",
-      score: "85%",
-    },
-    {
-      subject: "English Language Quiz",
-      date: "Jan 12, 2025",
-      duration: "20 mins",
-      score: "45%",
-    },
-    {
-      subject: "General Knowledge Test",
-      date: "Jan 12, 2025",
-      duration: "15 mins",
-      score: "92%",
-    },
-  ];
+
+// Profile Setting Notifications
+export const notifications =[
+  {
+    id:1,
+    image: user1,
+    title: 'New Course Added',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec feugiat mi.', 
+    time: '2 hours ago', 
+    status: 'unread'
+  },
+  {
+    id:3,
+    image: user1,
+    title: 'New Course Added',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec feugiat mi.', 
+    time: '2 hours ago', 
+    status: 'unread'
+  },
+  {
+    id:2,
+    image: user1,
+    title: 'New Course Added',
+    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur nesciunt error quae, neque eaque molestiae sequi et voluptates nam atque qui culpa deleniti fugit ab delectus minima quia praesentium est necessitatibus. Reprehenderit velit perspiciatis architecto a voluptatem cum, quas quidem facere quisquam alias repudiandae sit recusandae, placeat ullam expedita debitis!', 
+    time: '2 hours ago', 
+    status: 'unread'
+  },
+]
