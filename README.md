@@ -72,4 +72,4 @@ Feel free to fork the project and submit pull requests. For any contributions, p
 - Test your changes thoroughly before submitting
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/oluwaseyipd/PrepMate/blob/main/LICENSE) file for details.
