@@ -44,7 +44,7 @@ const testimonials = () => {
                   </div>
 
                   <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
-    Satisfied Customers Are Our Best Ads.
+                  Voices of Success
   </h2>
         </div>
 
@@ -64,7 +64,7 @@ const testimonials = () => {
               {/* Review Text */}
               <p className="text-gray-600 text-2xl">{testimonial.text}</p>
 
-              <div className="border-b border-gray-200"></div>
+              <div className="border-b border-blue-200"></div>
 
               {/* Reviewer Info */}
               <div className="flex items-center space-x-4 pt-4">

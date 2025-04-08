@@ -16,22 +16,22 @@ const Faq = () => {
       <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-start">
         {/* Left Side - Subscription Form */}
         <div className="relative space-y-6 flex-1">
-          <div className="absolute -top-3 -right-0 w-16 h-16">
+          <div className="absolute -top-3 right-40 w-16 h-16">
             <img src={shape1} alt="Lot Of Choices" className="w-32" />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900">
-            Got A Question For Campty?
+            Got A Question For PrepMate?
           </h2>
           <p className="text-gray-500 text-lg md:text-xl max-w-md">
             If there are questions you want to ask, we will answer all your questions.
           </p>
-          <div className="flex border border-black rounded-full overflow-hidden">
+          <div className="flex border border-blue-600 rounded-full overflow-hidden">
             <input
               type="email"
               placeholder="Enter Your Email"
               className="flex-1 px-4 py-2 text-lg text-gray-500 focus:outline-none"
             />
-            <button className="bg-black text-white px-6 py-2 md:px-10 md:py-5 rounded-full hover:bg-gray-800 transition cursor-pointer">
+            <button className="bg-blue-600 text-white px-6 py-2 md:px-10 md:py-5 rounded-full hover:bg-blue-500 hover:text-white transition duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] cursor-pointer">
               Submit
             </button>
           </div>

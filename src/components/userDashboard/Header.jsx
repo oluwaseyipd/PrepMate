@@ -5,8 +5,8 @@ import user1 from '../../assets/images/user1.jpeg';
 
 const Header = ({ toggleSidebar }) => {
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between">
-      {/* Harmburger Icon for Mobile */}
+<header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between sticky top-0">
+{/* Harmburger Icon for Mobile */}
       <button className="md:hidden" onClick={toggleSidebar}>
         <Menu size={24} className="text-gray-700" />
       </button>

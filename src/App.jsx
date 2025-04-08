@@ -17,7 +17,8 @@ import VerifyEmail from "./pages/authentication/VerifyEmail";
 
 // Dashboards Pages
 import Overview from "./pages/userDashboard/Overview";
-import Courses from "./pages/userDashboard/Courses";
+import AllCourses from "./pages/userDashboard/AllCourses";
+import MyCourses from "./pages/userDashboard/MyCourses";
 import Analytics from "./pages/userDashboard/Analytics";
 import Resources from "./pages/userDashboard/Resources";
 import AccountSettings from "./pages/userDashboard/AccountSettings";
@@ -61,7 +62,8 @@ function App() {
             <Route path="/dashboard/*" element={<UserLayout />}>
               <Route index element={<Overview />} />
               <Route path="overview" element={<Overview />} />
-              <Route path="courses" element={<Courses />} />
+              <Route path="allcourses" element={<AllCourses />} />
+              <Route path="mycourses" element={<MyCourses />} />
               <Route path="analytics" element={<Analytics />} />
               <Route path="resources" element={<Resources />} />
               <Route path="settings" element={<AccountSettings />} />

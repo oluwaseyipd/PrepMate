@@ -1,0 +1,118 @@
+import courseImage from "../assets/images/courses/courseImage.png";
+
+export const courses = [
+  {
+    id: 1,
+    title: "Introduction to Programming",
+    duration: "25 mins",
+    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore qui, aut odit, ullam eaque exercitationem cumque quae voluptas perferendis, atque repellat culpa quam ipsum quod.",
+    image: courseImage,
+  },
+  {
+    id: 2,
+    title: "Web Development",
+    duration: "25 mins",
+    description: "Build modern websites with HTML, CSS, and JavaScript.",
+    image: courseImage,
+  },
+  {
+    id: 3,
+    title: "Data Science Fundamentals",
+    duration: "25 mins",
+    description: "Explore data analysis, visualization, and machine learning.",
+    image: courseImage,
+  },
+  {
+    id: 4,
+    title: "Graphic Design Mastery",
+    duration: "25 mins",
+    description:
+      "Master design principles with tools like Photoshop and Figma.",
+    image: courseImage,
+  },
+  {
+    id: 5,
+    title: "Cybersecurity Essentials",
+    duration: "25 mins",
+    description: "Learn how to protect systems from cyber threats.",
+    image: courseImage,
+  },
+  {
+    id: 6,
+    title: "Mobile App Development",
+    duration: "25 mins",
+    description: "Create Android and iOS apps using React Native.",
+    image: courseImage,
+  },
+  {
+    id: 7,
+    title: "Artificial Intelligence Basics",
+    duration: "25 mins",
+    description: "Get started with AI, neural networks, and automation.",
+    image: courseImage,
+  },
+  {
+    id: 8,
+    title: "Digital Marketing Strategy",
+    duration: "25 mins",
+    description: "Learn SEO, social media marketing, and content strategy.",
+    image: courseImage,
+  },
+  {
+    id: 9,
+    title: "Project Management",
+    duration: "25 mins",
+    description: "Become a project leader with Agile and Scrum methodologies.",
+    image: courseImage,
+  },
+  {
+    id: 10,
+    title: "Entrepreneurship 101",
+    duration: "25 mins",
+    description: "Turn ideas into successful business ventures.",
+    image: courseImage,
+  },
+  {
+    id: 11,
+    title: "Photography and Editing",
+    duration: "25 mins",
+    description: "Capture stunning photos and edit like a pro.",
+    image: courseImage,
+  },
+  {
+    id: 12,
+    title: "Blockchain and Cryptocurrency",
+    duration: "25 mins",
+    description:
+      "Understand how blockchain works and explore cryptocurrencies.",
+    image: courseImage,
+  },
+  {
+    id: 13,
+    title: "Cloud Computing Fundamentals",
+    duration: "25 mins",
+    description: "Learn about cloud platforms like AWS, Azure, and GCP.",
+    image: courseImage,
+  },
+  {
+    id: 14,
+    title: "UI/UX Design Principles",
+    duration: "25 mins",
+    description: "Design user-friendly, beautiful interfaces and experiences.",
+    image: courseImage,
+  },
+  {
+    id: 15,
+    title: "Game Development",
+    duration: "25 mins",
+    description: "Create 2D and 3D games with Unity and Unreal Engine.",
+    image: courseImage,
+  },
+  {
+    id: 16,
+    title: "Advanced JavaScript",
+    duration: "25 mins",
+    description: "Take your JavaScript skills to the next level.",
+    image: courseImage,
+  },  
+];

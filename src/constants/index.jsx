@@ -25,57 +25,67 @@ export const navItems = [
 export const userTestimony = [
   {
     name: "Theresa Jordan",
-    role: "Traveler",
-    text: "I think this is the best camping service I have ever tried and I recommend it to you.",
+    role: "Computer Engineering",
+    text: "PrepMate helped me prepare for my first university exams with ease. The timed tests made me feel more confident!",
     avatar: user1, // Replace with image path
   },
   {
     name: "James Wilson",
-    role: "Climber",
-    text: "Campty helps me a lot in finding interesting camping destinations.",
+    role: "Chemistry",
+    text: "I love how easy it is to track my progress. I can see where I’m improving and where I need more work!",
     avatar: user2, // Replace with image path
   },
   {
     name: "Jhon Tosan",
-    role: "Adventurer",
-    text: "Fun, from the city of wates not too far. Beautiful views, pretty and cool.",
+    role: "Computer Science",
+    text: "The explanations after each test really helped me understand why I got a question wrong. Great learning tool!",
     avatar: user3, // Replace with image path
   },
   {
     name: "James Wilson",
-    role: "Climber",
-    text: "Campty helps me a lot in finding interesting camping destinations.",
+    role: "Accountancy",
+    text: "The course categories make it easy to focus on the subjects I’m struggling with. It’s a perfect exam prep platform!",
     avatar: user4, // Replace with image path
   },
   {
     name: "Jhon Tosan",
-    role: "Adventurer",
-    text: "Fun, from the city of wates not too far. Beautiful views, pretty and cool.",
+    role: "Anatomy",
+    text: "As a freshman, I was nervous about my exams. But PrepMate made studying more organized and less stressful!",
     avatar: user5, // Replace with image path
   },
   {
     name: "Jhon Tosan",
-    role: "Adventurer",
-    text: "Fun, from the city of wates not too far. Beautiful views, pretty and cool.",
+    role: "Mathematics",
+    text: "I love the leaderboard! It adds a little competition and keeps me motivated to study harder.",
     avatar: user6, // Replace with image path
   },
 ];
 
 export const faqs = [
   {
-    question: "What is Campty?",
+    question: "What is PrepMate?",
     answer:
-      "Campty is a camping service that helps you find and book the best camping spots.",
+      " PrepMate is an online Computer-Based Test (CBT) platform designed to help students practice and prepare for exams with timed tests, performance tracking, and insightful feedback.",
   },
   {
-    question: "How to book tickets?",
+    question: "Are the tests similar to real university exams?",
     answer:
-      "You can book tickets directly through our website by selecting a destination and following the booking steps.",
+      "Yes, the questions are curated by experienced tutors to reflect the format and difficulty of actual university exams.",
   },
   {
-    question: "What kind of service will I get?",
+    question: " Is PrepMate free to use?",
     answer:
-      "We offer complete camping solutions, including guides, safety measures, and convenient booking.",
+      "Absolutely. PrepMate is completely free and designed to support your academic journey.",
+  },
+  {
+    question: "How do I sign up?",
+    answer:
+      "Click on the “Sign Up” button at the top of the page and fill in your basic information to create an account.",
+  },
+  {
+    question: "Can I download my test results?",
+    answer:
+      "Yes, after each test, you can download a result sheet that includes your answers, the correct options, and explanations.",
   },
 ];
 
@@ -152,11 +162,9 @@ export const navigation = [
 ];
 
 export const communityLinks = [
-  { href: "#", text: "Events" },
-  { href: "#", text: "Meetups" },
-  { href: "#", text: "Conferences" },
-  { href: "#", text: "Hackathons" },
-  { href: "#", text: "Jobs" },
+  { href: "#", text: "Faqs" },
+  { href: "#", text: "Policy" },
+  { href: "#", text: "Terms & Conditions" },
 ];
 
 export const socialLinks = [

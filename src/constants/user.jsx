@@ -13,6 +13,30 @@ export   const navItems = [
   { name: 'Resources', icon: Bookmark, path: '/dashboard/resources' },
 ];
 
+
+
+// Overview
+
+export const data = [
+  { name: 'Jan', Study: 60, Exam: 20 },
+  { name: 'Feb', Study: 40, Exam: 30 },
+  { name: 'Mar', Study: 50, Exam: 10 },
+  { name: 'Apr', Study: 70, Exam: 20 },
+  { name: 'May', Study: 40, Exam: 20 },
+  { name: 'Jun', Study: 50, Exam: 30 },
+  { name: 'Jul', Study: 60, Exam: 20 },
+  { name: 'Aug', Study: 50, Exam: 20 },
+  { name: 'Sep', Study: 55, Exam: 25 },
+  { name: 'Oct', Study: 45, Exam: 15 },
+  { name: 'Nov', Study: 65, Exam: 25 },
+  { name: 'Dec', Study: 50, Exam: 20 },
+];
+
+
+
+
+// Account Settings
+
 // Profile Settings Navigation
 export const profileSettingsNav = [
   { name: 'My Details', path: 'details' },
@@ -48,3 +72,6 @@ export const notifications =[
     status: 'unread'
   },
 ]
+
+
+

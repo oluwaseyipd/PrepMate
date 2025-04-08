@@ -36,7 +36,7 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="bg-blue-50 min-h-screen p-6">
+    <div className="bg-blue-50 min-h-screen p-2 md:p-6">
       <div className="bg-white shadow rounded-lg p-6">
         <div className="relative">
           <div
@@ -46,19 +46,19 @@ const AccountSettings = () => {
           <img
             src={user1}
             alt="User Profile"
-            className="w-30 h-30 rounded-full border-4 border-white absolute bottom-0 left-4 transform translate-y-1/2"
+            className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-0 left-4 transform translate-y-1/2"
           />
           <div
             {...getRootProps()}
-            className="bg-transparent border text-gray-200 border-gray-400 px-5 py-1 rounded-full absolute top-6 right-3 cursor-pointer"
+            className="bg-transparent border text-gray-200 border-gray-400  px-5 py-1  text-sm md:text-lg rounded-full absolute top-6 right-3 cursor-pointer"
           >
             <input {...getInputProps()} />
             Change Cover
           </div>{" "}
         </div>
-        <div className="mt-6 pl-40">
+        <div className="mt-15 md:mt-6 md:pl-40">
           <h2 className="text-2xl text-black font-semibold">Mohid Khan</h2>
-          <p className="text-gray-500">
+          <p className="text-gray-500 text-sm">
             UX Designer | San Francisco | Joined August 2024
           </p>
         </div>
@@ -126,6 +126,27 @@ const AccountSettings = () => {
               </div>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label className="text-gray-600">Role</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 text-black p-2 rounded mt-1"
+              placeholder="Enter Role"
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Country</label>
+            <input
+              type="text"
+              className="w-full border border-gray-300 text-black p-2 rounded mt-1"
+              placeholder="Enter Country"
+            />
+          </div>
+          
+
+          </div>
+
             {/* Upload image */}
             <div className="mt-4">
               <label className="text-gray-600">Your Photo</label>
@@ -144,7 +165,7 @@ const AccountSettings = () => {
                     <p className="text-black">
                       Click to upload or drag and drop
                     </p>
-                    <p className="text-blue-500">
+                    <p className="text-blue-500 text-sm md:text-lg text-center">
                       SVG, PNG, JPEG OR GIF (max 1080px x 1200px)
                     </p>
                   </>
@@ -244,7 +265,7 @@ const AccountSettings = () => {
               <p className="mb-1 text-black font-semibold">
                 Password Requirements:
               </p>
-              <ul className="pl-10 text-gray-700 list-disc">
+              <ul className="pl-5 md:pl-10 text-gray-700 list-disc">
                 <li className="mb-1">At least one lowercase character</li>
                 <li className="mb-1">
                   Minimum 8 characters long - the more, the better
