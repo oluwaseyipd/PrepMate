@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Camera, Save, X, Eye, EyeOff } from "lucide-react";
+import { Camera, Save, X, Eye, EyeOff, PlusCircle } from "lucide-react";
 import user1 from "../../assets/images/user1.jpeg";
 import banner from "../../assets/images/banner.jpg";
 import { profileSettingsNav } from "../../constants/user";
@@ -27,7 +27,8 @@ const AccountSettings = () => {
       reader.readAsDataURL(file);
     },
   });
-  
+
+
   const toggleNotification = (id) => {
     setExpandedNotification(expandedNotification === id ? null : id);
     if (!readNotifications.includes(id)) {
@@ -43,11 +44,15 @@ const AccountSettings = () => {
             className="h-32 bg-cover bg-center rounded-t-lg"
             style={{ backgroundImage: `url(${banner})` }}
           ></div>
-          <img
+          
+            <img
             src={user1}
             alt="User Profile"
-            className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-0 left-4 transform translate-y-1/2"
+            className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-8 left-4 transform translate-y-1/2"
           />
+          <PlusCircle className="text-blue-500 relative bottom-15 -right-14 md:-right-24 transform translate-x-1/2 translate-y-1/2 bg-white rounded-full  p-[2px] md:p-1 cursor-pointer" size={30} />
+          
+          
           <div
             {...getRootProps()}
             className="bg-transparent border text-gray-200 border-gray-400  px-5 py-1  text-sm md:text-lg rounded-full absolute top-6 right-3 cursor-pointer"

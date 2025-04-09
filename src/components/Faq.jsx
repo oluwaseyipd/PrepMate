@@ -16,7 +16,7 @@ const Faq = () => {
       <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-start">
         {/* Left Side - Subscription Form */}
         <div className="relative space-y-6 flex-1">
-          <div className="absolute -top-3 right-40 w-16 h-16">
+          <div className="absolute -top-3 right-0 md:right-40 w-16 h-16">
             <img src={shape1} alt="Lot Of Choices" className="w-32" />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900">

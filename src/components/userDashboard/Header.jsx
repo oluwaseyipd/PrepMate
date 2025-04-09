@@ -34,7 +34,7 @@ const Header = ({ toggleSidebar }) => {
         </Link>
 
         {/* Avatar */}
-        <Link to="/dashboard/settings">
+        <Link to="/dashboard/settings/">
           <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden border-2 border-blue-500 cursor-pointer">
             <img
               src={user1}
