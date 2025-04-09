@@ -51,7 +51,7 @@ const MyCourses = () => {
                 <img src={course.image} alt={course.title} className="w-full h-42 object-cover rounded" />
                 <button
                   onClick={() => removeCourse(course.id)}
-                  className="relative -top-40 -right-50 w-30 mt-2 px-6 py-1 bg-blue-600 border border-blue-600 text-white rounded-full hover:bg-transparent hover:text-blue-600 transition"
+                  className="relative -top-40 -right-45 md:-right-50 w-30 mt-2 px-6 py-1 bg-blue-600 border border-blue-600 text-white rounded-full hover:bg-transparent hover:text-blue-600 transition"
                 >
                   Remove
                 </button>

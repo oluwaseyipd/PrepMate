@@ -41,7 +41,7 @@ const CourseDetails = () => {
       {/* Floating Message */}
       {message && (
         <div
-          className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 px-6 py-2 shadow-lg text-white ${
+          className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 px-3 md:px-6 py-2 shadow-lg text-white ${
             message.type === 'success' ? 'bg-green-500' : 'bg-red-500'
           }`}
         >
