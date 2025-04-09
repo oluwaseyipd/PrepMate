@@ -1,56 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { courses, categoryStyles } from '../../constants/courses';
 import { MarsStroke, Share2, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
-const CourseDetails = () => {
+const MyCourseDetails = () => {
   const { id } = useParams();
   const course = courses.find((course) => course.id.toString() === id);
 
-  const [message, setMessage] = useState(null); // { text: "", type: "success" | "error" }
-
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => setMessage(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
-  const toTitleCase = (str) => {
-    return str.replace(/\w\S*/g, (txt) =>
-      txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-    );
-  };
-
-  const handleAddCourse = () => {
-    const existingCourses = JSON.parse(localStorage.getItem('myCourses')) || [];
-    if (!existingCourses.some((c) => c.id === course.id)) {
-      existingCourses.push(course);
-      localStorage.setItem('myCourses', JSON.stringify(existingCourses));
-      setMessage({ text: 'A new course has been added', type: 'success' });
-    } else {
-      setMessage({ text: 'The course already exist in your folder', type: 'error' });
-    }
-  };
+  const toTitleCase = (str) =>
+    str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 
   if (!course) return <div className="p-4 text-black">Course not found.</div>;
 
   return (
-    <div className="relative p-4">
-      {/* Floating Message */}
-      {message && (
-        <div
-          className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 px-6 py-2 shadow-lg text-white ${
-            message.type === 'success' ? 'bg-green-500' : 'bg-red-500'
-          }`}
-        >
-          {message.text}
-        </div>
-      )}
-
+    <div className="p-4">
       <h1 className="text-3xl text-black font-bold mb-4">Course Details</h1>
-
       <div className="flex flex-col md:flex-row gap-4">
         {/* Main Content */}
         <div className="flex flex-col w-full md:w-2/3 bg-white p-5 rounded-lg shadow-md">
@@ -71,14 +35,14 @@ const CourseDetails = () => {
               })()}
               <Share2 className="text-gray-700 cursor-pointer" size={25} />
               <button
-                onClick={handleAddCourse}
-                className="px-6 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-500 transition"
+                className="px-6 py-1 bg-blue-600 text-white rounded-full cursor-pointer hover:bg-blue-500 transition"
               >
-                Add Course
+                Take Test
               </button>
             </div>
           </div>
 
+          {/* Course Image */}
           <div className="h-[250px] md:h-[500px] mt-4">
             <img
               src={course.image}
@@ -128,7 +92,7 @@ const CourseDetails = () => {
           </div>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar Details */}
         <div className="w-full md:w-1/3 flex flex-col gap-5">
           <div className="p-5 bg-white rounded-lg shadow-md">
             <h2 className="text-black text-xl font-bold mb-3">Course Info</h2>
@@ -148,4 +112,4 @@ const CourseDetails = () => {
   );
 };
 
-export default CourseDetails;
+export default MyCourseDetails;

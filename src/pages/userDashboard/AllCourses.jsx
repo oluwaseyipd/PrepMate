@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle, ArrowLeft, ArrowRight, Bookmark, BookIcon, Clock, Star } from 'lucide-react';
-import { courses } from '../../constants/courses';
+import { courses, categoryStyles } from '../../constants/courses';
 
 const AllCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,17 +13,36 @@ const AllCourses = () => {
 
   const handleNextPage = () => setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
   const handlePrevPage = () => setCurrentPage((prev) => (prev > 1 ? prev - 1 : prev));
+  
+  // Course Category Title Case formartting 
+  const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, (txt) =>
+      txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    );
+  };
 
+  
   return (
     <div className="p-4">
       <h1 className="text-3xl text-black font-bold mb-4">All Courses</h1>
       <div className="md:grid md:grid-cols-2 lg:grid-cols-4 my-2 gap-4">
-        {courses.map((course) => (
-          <div key={course.id} className="flex flex-col bg-white border rounded-xl p-3 shadow transition">
+      {currentCourses.map((course) => (
+
+          <div key={course.id} className="flex flex-col bg-white border rounded-xl p-3 mt-5 md:mt-0 shadow transition">
 
             <img src={course.image} alt={course.title} className="w-full h-42 object-cover rounded" />
             <div className='mt-3'>
-              <span className='py-1 px-4 bg-blue-200 text-blue-500 rounded-full text-sm '>{course.category}</span>
+            {(() => {
+  const category = toTitleCase(course.category);
+  const styles = categoryStyles[category] || categoryStyles.default;
+  return (
+    <span className={`py-1 px-4 rounded-full text-sm ${styles.bg} ${styles.text}`}>
+      {category}
+    </span>
+  );
+})()}
+
+
             <h2 className="my-3 font-semibold text-black text-xl">{course.title}</h2>
             <div className="flex items-center gap-2">
               <img src={course.authorImage} alt={course.author} className="w-8 h-8 rounded-full" />
@@ -45,7 +64,7 @@ const AllCourses = () => {
                 <span className='text-sm text-black'>{course.rating}</span>
                 <span className='text-sm text-black'>({course.ratingCount})</span>
               </div>
-              <Link to={`/dashboard/coursedetails`}>
+              <Link to={`../coursedetails/${course.id}`}>
               
   <button className="mt-2 px-6 py-1 bg-transparent border-1 border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white cursor-pointer transition duration-300">
                 View Details

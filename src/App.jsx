@@ -24,6 +24,7 @@ import Resources from "./pages/userDashboard/Resources";
 import AccountSettings from "./pages/userDashboard/AccountSettings";
 import Tests from "./pages/userDashboard/Tests";
 import CourseDetails from "./pages/userDashboard/CourseDetails";
+import MyCourseDetails from "./pages/userDashboard/MyCourseDetails";
 
 // Layout Pages
 import UserLayout from "./layouts/UserLayout";
@@ -69,7 +70,8 @@ function App() {
               <Route path="resources" element={<Resources />} />
               <Route path="settings" element={<AccountSettings />} />
               <Route path="tests" element={<Tests />} />
-              <Route path="coursedetails" element={<CourseDetails />} />
+              <Route path="coursedetails/:id" element={<CourseDetails />} />
+              <Route path="mycoursedetails/:id" element={<MyCourseDetails />} /> 
             </Route>
 
 
