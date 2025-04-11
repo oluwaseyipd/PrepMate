@@ -1,7 +1,7 @@
 import React from 'react';
 import categories from "../assets/images/features/categories.png";
 import leaderboard from "../assets/images/features/leaderboard.png";
-import progress from "../assets/images/features/progress.png";
+import progress from "../assets/images/features/Progress.png";
 import timed from "../assets/images/features/timed.png";
 import shape1 from "../assets/images/shapes/shape-2.png";
 
