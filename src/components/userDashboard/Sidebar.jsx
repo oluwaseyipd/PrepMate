@@ -41,7 +41,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
                 onClick={() => setIsCoursesOpen(!isCoursesOpen)}
               >
                 <item.icon size={20} />
-                <span className="block">Courses</span>
+                <span className="block cursor-pointer">Courses</span>
               </button>
               {isCoursesOpen && (
                 <div className="ml-8">

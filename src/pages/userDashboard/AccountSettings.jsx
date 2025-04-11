@@ -12,10 +12,12 @@ const AccountSettings = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [bannerImage, setBannerImage] = useState(banner);
+  const [profileImage, setProfileImage] = useState(user1);
   const [expandedNotification, setExpandedNotification] = useState(null);
   const [readNotifications, setReadNotifications] = useState([]);
 
 
+  // Changing Profile Banner
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
@@ -27,6 +29,21 @@ const AccountSettings = () => {
       reader.readAsDataURL(file);
     },
   });
+   
+// Changing Profile Picture
+  const fileInputRef = React.useRef();
+
+const handleProfileImageChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
 
 
   const toggleNotification = (id) => {
@@ -45,12 +62,31 @@ const AccountSettings = () => {
             style={{ backgroundImage: `url(${banner})` }}
           ></div>
           
-            <img
+            {/* <img
             src={user1}
             alt="User Profile"
             className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-8 left-4 transform translate-y-1/2"
-          />
-          <PlusCircle className="text-blue-500 relative bottom-15 -right-14 md:-right-24 transform translate-x-1/2 translate-y-1/2 bg-white rounded-full  p-[2px] md:p-1 cursor-pointer" size={30} />
+          /> */}
+
+<div className="relative">
+  <img
+    src={profileImage}
+    alt="User Profile"
+    className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-1 left-4 transform translate-y-1/2"
+  />
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleProfileImageChange}
+    ref={fileInputRef}
+    className="hidden"
+  />
+  <PlusCircle
+    className="text-blue-500 absolute bottom-6 left-15 md:left-25 transform translate-x-1/2 translate-y-1/2 bg-white rounded-full p-[2px] md:p-1 cursor-pointer"
+    size={30}
+    onClick={() => fileInputRef.current.click()}
+  />
+</div>
           
           
           <div

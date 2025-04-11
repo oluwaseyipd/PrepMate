@@ -56,7 +56,7 @@ const ContactBody = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg hover:from-blue-600 hover:to-blue-800 transition"
+                className="w-full py-3 bg-gradient-to-r cursor-pointer from-blue-500 to-blue-700 text-white rounded-lg hover:from-blue-600 hover:to-blue-800 transition"
               >
                 Send Message
               </button>
