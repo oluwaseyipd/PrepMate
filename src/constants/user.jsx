@@ -73,5 +73,59 @@ export const notifications =[
   },
 ]
 
+// Overview Statistics
+export const overview = [
+  { name: 'Week 1', score: 72 },
+  { name: 'Week 2', score: 30 },
+  { name: 'Week 3', score: 65 },
+  { name: 'Week 4', score: 90 },
+];
 
+// Over view Recent Tests
+export const recentTest = [
+  {
+    title: "Introduction to Biology",
+    date: "2025-04-09",
+    duration: "30 mins",
+    score: "85%",
+    status: "Completed",
+  },
+  {
+    title: "Basic Algebra",
+    date: "2025-04-08",
+    duration: "45 mins",
+    score: "-",
+    status: "Pending",
+  },
+  {
+    title: "History of Nigeria",
+    date: "2025-04-06",
+    duration: "25 mins",
+    score: "92%",
+    status: "Completed",
+  },
+  {
+    title: "History of Nigeria",
+    date: "2025-04-06",
+    duration: "25 mins",
+    score: "92%",
+    status: "Completed",
+  },
+  {
+    title: "Basic Algebra",
+    date: "2025-04-08",
+    duration: "45 mins",
+    score: "-",
+    status: "Pending",
+  },
+];
 
+// Recent Activities
+export   const activities = [
+  { id: 1, action: "Logged in", timestamp: new Date() - 5000 },
+  { id: 2, action: "Took a test", timestamp: new Date() - 60000 },
+  { id: 3, action: "Downloaded a resource", timestamp: new Date() - 3600000 },
+  { id: 4, action: "Logged out", timestamp: new Date() - 86400000 },
+  { id: 5, action: "Changed settings", timestamp: new Date() - 2592000000 },
+  { id: 6, action: "Took a test", timestamp: new Date() - 60000 },
+];
