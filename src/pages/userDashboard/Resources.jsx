@@ -1,39 +1,217 @@
-import React from 'react'
-import {Search } from "lucide-react";
-
+import React, { useState, useEffect } from 'react';
+import {
+  CheckSquare,
+  Square,
+  Search,
+  Folder,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+} from "lucide-react";
+import { resourceContents } from "../../constants/resources";
 
 const Resources = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [checkedItems, setCheckedItems] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [hoveredItemId, setHoveredItemId] = useState(null);
+
+  const useWindowWidth = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+    useEffect(() => {
+      const handleResize = () => setWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+    return width;
+  };
+
+  const width = useWindowWidth();
+  const isMediumUp = width >= 768;
+  const rowsPerPage = isMediumUp ? 3 : 1;
+
+  const allResources = resourceContents;
+
+  const filteredResources = allResources.filter((item) => {
+    const matchesCategory = selectedCategory ? item.type === selectedCategory : true;
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const chunkArray = (arr, chunkSize) => {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      chunks.push(arr.slice(i, i + chunkSize));
+    }
+    return chunks;
+  };
+
+  const chunkedItems = chunkArray(filteredResources, 12);
+  const totalPages = Math.ceil(chunkedItems.length / rowsPerPage);
+  const paginatedRows = chunkedItems.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+
+  const toggleCheckbox = (id) => {
+    setCheckedItems((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleDownload = (url) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop(); // Get the file name
+    link.click();
+  };
+
+  const handleDownloadSelected = () => {
+    const selectedFiles = filteredResources.filter(item => checkedItems[item.id]);
+    selectedFiles.forEach(item => {
+      handleDownload(item.path);
+    });
+  };
+
+  const hasCheckedItems = Object.values(checkedItems).some(Boolean);
+
   return (
     <div className="p-4">
-    <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
+      {/* Top Section */}
+      <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
         <h1 className="text-3xl font-bold text-black">Resources</h1>
-        {/* Search + Category on the right */}
-  <div className="flex items-center gap-4 mt-5 md:mt-0">
-    {/* Search Bar */}
-    <div className="relative w-full sm:w-auto">
-    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-    <input
-      type="text"
-      placeholder="Search resources by name..."
-      className="px-4 py-2 border text-black border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
-    />
-      
+        <div className="flex items-center justify-between gap-4 mt-5 md:mt-0">
+          {/* Search Bar */}
+          <div className="flex items-center relative w-full sm:w-auto bg-blue-50 border border-gray-300 rounded-full p-1">
+            <Search size={18} className="mr-2 text-gray-500" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search resources by name..."
+              className="w-full bg-blue-50 text-black mr-2 outline-none sm:w-auto"
+            />
+          </div>
+
+          {/* Category Dropdown */}
+          <div className="relative w-auto hidden sm:block">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="appearance-none px-4 py-2 pr-10 border border-gray-300 rounded-full text-gray-700 focus:ring-0"
+            >
+              <option value="">All Categories</option>
+              <option value="folder">Folder</option>
+              <option value="pdf">PDF</option>
+              <option value="xls">XLS</option>
+              <option value="doc">DOC</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-500">
+              <ChevronDown size={18} />
+            </div>
+          </div>
+
+          <div className="sm:hidden">
+            <button className="p-2 bg-blue-100 rounded-full text-blue-600 border border-gray-300">
+              <Folder size={20} className="text-black" />
+            </button>
+          </div>
+        </div>
       </div>
 
-    {/* Category Dropdown */}
-    <select className="px-4 py-2 border border-gray-300 rounded-full text-gray-700 focus:ring-0 w-full sm:w-auto">
-      <option value="">All Categories</option>
-      <option value="science">Science</option>
-      <option value="math">Mathematics</option>
-      <option value="history">History</option>
-      <option value="tech">Technology</option>
-    </select>
-  </div>
-  
+      {/* Download Selected Button */}
+      {hasCheckedItems && (
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={handleDownloadSelected}
+            className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-full shadow hover:bg-blue-700 transition-all duration-200"
+          >
+            <Download size={18} />
+            Download Selected
+          </button>
+        </div>
+      )}
 
-      </div>
+      {/* Resource Grid */}
+      {filteredResources.length === 0 ? (
+        <div className="text-center text-gray-500 py-10">
+          <p className="text-xl">No matching files found</p>
+          <p className="text-sm mt-2">Try checking your spelling or using different keywords.</p>
+        </div>
+      ) : (
+        paginatedRows.map((row, index) => (
+          <div key={index} className="grid grid-cols-3 md:grid-cols-12 gap-5 bg-white p-5 mb-1 rounded-xl">
+            {row.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-col items-start min-h-[200px] relative group"
+                onMouseEnter={() => setHoveredItemId(item.id)}
+                onMouseLeave={() => setHoveredItemId(null)}
+              >
+                <button onClick={() => toggleCheckbox(item.id)}>
+                  {checkedItems[item.id] ? (
+                    <CheckSquare size={20} className="text-blue-600 cursor-pointer" />
+                  ) : (
+                    <Square size={20} className="text-gray-400 cursor-pointer" />
+                  )}
+                </button>
+
+                {/* Resource Image with Hover Download Icon */}
+                <div className="relative my-5">
+                  <img src={item.icon} alt="" className="w-15" />
+                  {hoveredItemId === item.id && (
+                    <button
+                      onClick={() => handleDownload(item.path)}
+                      className="absolute inset-0 cursor-pointer bg-blue-600 bg-opacity-30 flex items-center justify-center text-white rounded-md"
+                    >
+                      <Download size={24} />
+                    </button>
+                  )}
+                </div>
+
+                <p className="text-black text-lg">{item.title}</p>
+                <span className="text-gray-500">{item.files} Files</span>
+              </div>
+            ))}
+          </div>
+        ))
+      )}
+
+      {/* Pagination Controls */}
+      {filteredResources.length > 0 && (
+        <div className="flex justify-center items-center gap-4 mt-6">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="p-2 rounded-full border border-blue-300 disabled:opacity-50"
+          >
+            <ChevronLeft size={18} className="text-blue-600" />
+          </button>
+
+          <div className="flex items-center gap-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <button
+                key={pageNum}
+                onClick={() => setCurrentPage(pageNum)}
+                className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  currentPage === pageNum
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                {pageNum}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="p-2 rounded-full border border-blue-300 disabled:opacity-50"
+          >
+            <ChevronRight size={18} className="text-blue-600" />
+          </button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Resources
+export default Resources;
