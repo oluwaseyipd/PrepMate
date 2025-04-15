@@ -137,7 +137,7 @@ const Resources = () => {
         </div>
       ) : (
         paginatedRows.map((row, index) => (
-          <div key={index} className="grid grid-cols-3 md:grid-cols-12 gap-5 bg-white p-5 mb-1 rounded-xl">
+          <div key={index} className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-12 gap-5 bg-white p-5 mb-1 rounded-xl">
             {row.map((item) => (
               <div
                 key={item.id}
