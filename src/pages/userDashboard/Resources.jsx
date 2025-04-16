@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
+  Copy,
 } from "lucide-react";
 import { resourceContents } from "../../constants/resources";
 
@@ -59,9 +60,10 @@ const Resources = () => {
   const handleDownload = (url) => {
     const link = document.createElement("a");
     link.href = url;
-    link.download = url.split("/").pop(); // Get the file name
+    link.download = url.split("/").pop();
     link.click();
   };
+
 
   const handleDownloadSelected = () => {
     const selectedFiles = filteredResources.filter(item => checkedItems[item.id]);
@@ -70,15 +72,40 @@ const Resources = () => {
     });
   };
 
+  const [message, setMessage] = useState(null);
+
+  const handleShare = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setMessage({ text: 'Link copied', type: 'success' });
+      setTimeout(() => setMessage(null), 2000);
+    } catch (err) {
+      setMessage({ text: 'Failed to copy link', type: 'error' });
+      setTimeout(() => setMessage(null), 2000);
+    }
+  };
+  
+
   const hasCheckedItems = Object.values(checkedItems).some(Boolean);
 
   return (
     <div className="p-4">
+            {/* Floating Message */}
+      {message && (
+  <div
+    className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 px-3 md:px-6 py-2 shadow-lg text-white ${
+      message.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    }`}
+  >
+    {message.text}
+  </div>
+)}
+
+
       {/* Top Section */}
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
         <h1 className="text-3xl font-bold text-black">Resources</h1>
         <div className="flex items-center justify-between gap-4 mt-5 md:mt-0">
-          {/* Search Bar */}
           <div className="flex items-center relative w-full sm:w-auto bg-blue-50 border border-gray-300 rounded-full p-1">
             <Search size={18} className="mr-2 text-gray-500" />
             <input
@@ -90,7 +117,6 @@ const Resources = () => {
             />
           </div>
 
-          {/* Category Dropdown */}
           <div className="relative w-auto hidden sm:block">
             <select
               value={selectedCategory}
@@ -153,16 +179,24 @@ const Resources = () => {
                   )}
                 </button>
 
-                {/* Resource Image with Hover Download Icon */}
                 <div className="relative my-5">
                   <img src={item.icon} alt="" className="w-15" />
                   {hoveredItemId === item.id && (
-                    <button
-                      onClick={() => handleDownload(item.path)}
-                      className="absolute inset-0 cursor-pointer bg-blue-600 bg-opacity-30 flex items-center justify-center text-white rounded-md"
-                    >
-                      <Download size={24} />
-                    </button>
+                    <div className="absolute inset-0 bg-blue-600 bg-opacity-30 flex items-center justify-center gap-2 rounded-md">
+                      <button
+                        onClick={() => handleDownload(item.path)}
+                        className="cursor-pointer bg-white p-1 rounded-full shadow hover:bg-blue-100 transition"
+                      >
+                        <Download size={16} className='text-blue-600' />
+                      </button>
+                      <button
+                        onClick={() => handleShare(item.path)}
+                        className="cursor-pointer bg-white p-1 rounded-full shadow hover:bg-blue-100 transition"
+                        title="Copy link"
+                      >
+                        <Copy size={16} className="text-blue-600 " />
+                      </button>
+                    </div>
                   )}
                 </div>
 
