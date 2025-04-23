@@ -15,7 +15,7 @@ import ResetPassword from "./pages/authentication/ResetPassword";
 import TwoStepVerification from "./pages/authentication/TwoStepVerification";
 import VerifyEmail from "./pages/authentication/VerifyEmail";
 
-// Dashboards Pages
+// Users Dashboards Pages
 import Overview from "./pages/userDashboard/Overview";
 import AllCourses from "./pages/userDashboard/AllCourses";
 import MyCourses from "./pages/userDashboard/MyCourses";
@@ -26,8 +26,20 @@ import Tests from "./pages/userDashboard/Tests";
 import CourseDetails from "./pages/userDashboard/CourseDetails";
 import MyCourseDetails from "./pages/userDashboard/MyCourseDetails";
 
+// Admin Dashboard Pages
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
+import AdminAnalytics from "./pages/adminDashboard/AdminAnalytics";
+import AdminAccountSettings from "./pages/adminDashboard/AdminAccountSettings";
+import ResourceLibrary from "./pages/adminDashboard/ResourceLibrary";
+import ManageCourses from "./pages/adminDashboard/ManageCourses";
+import ManageTests from "./pages/adminDashboard/ManageTests";
+import ManageUsers from "./pages/adminDashboard/ManageUsers";
+
+
 // Layout Pages
 import UserLayout from "./layouts/UserLayout";
+import AdminLayout from "./layouts/AdminLayout";
+
 
 // Components
 import Loader from "./components/Loader";
@@ -74,6 +86,17 @@ function App() {
               <Route path="mycoursedetails/:id" element={<MyCourseDetails />} /> 
             </Route>
 
+            {/* Admin Dashboard Routes */}
+            <Route path="/admin/*" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <ROute path="dashboard" element={<AdminDashboard />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="settings" element={<AdminAccountSettings />} />
+              <Route path="resources" element={<ResourceLibrary />} />
+              <Route path="managecourses" element={<ManageCourses />} />
+              <Route path="managetests" element={<ManageTests />} />
+              <Route path="manageusers" element={<ManageUsers />} />
+            </Route>
 
             {/* Not Found Route */}
             <Route path="*" element={<NotFound />} />
