@@ -89,7 +89,7 @@ function App() {
             {/* Admin Dashboard Routes */}
             <Route path="/admin/*" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
-              <ROute path="dashboard" element={<AdminDashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminAccountSettings />} />
               <Route path="resources" element={<ResourceLibrary />} />

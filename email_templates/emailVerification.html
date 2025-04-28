@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Your Email</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .header {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .content {
+        padding: 30px;
+        color: #333333;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #155dfc;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .button:hover {
+        background-color: #1d4ed8;
+
+      }
+
+      .footer {
+        padding: 20px;
+        font-size: 12px;
+        color: #888888;
+        text-align: center;
+        background-color: #f9fafb;
+      }
+
+      @media (max-width: 600px) {
+        .content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td align="center" style="padding: 20px 0;">
+          <table class="email-container" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td class="header">
+                <img src="../public/logo-w.png" alt="" srcset="">
+              </td>
+            </tr>
+            <tr>
+              <td class="content">
+                <h2>Verify Your Email Address</h2>
+                <p>Hi [User],</p>
+                <p>
+                  Thank you for signing up with PrepMate! To complete your registration, please verify your email address by clicking the button below.
+                </p>
+                <p style="text-align: center;">
+                  <a href="https://prepmate.com/verify-email?token=xyz" class="button">Verify Email</a>
+                </p>
+                <p>
+                  If the button doesn’t work, you can copy and paste the link below into your browser:
+                </p>
+                <p style="word-break: break-all; color: #3b82f6;">
+                  https://prepmate.com/verify-email?token=xyz
+                </p>
+                <p>
+                  If you didn’t create a PrepMate account, you can safely ignore this email.
+                </p>
+                <p>Warm regards,<br>The PrepMate Team</p>
+              </td>
+            </tr>
+            <tr>
+              <td class="footer">
+                &copy; 2025 PrepMate. All rights reserved.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
