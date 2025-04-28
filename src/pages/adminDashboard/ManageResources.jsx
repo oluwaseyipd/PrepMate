@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ManageCourses = () => {
+const ManageResources = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const ManageCourses = () => {
   )
 }
 
-export default ManageCourses
+export default ManageResources

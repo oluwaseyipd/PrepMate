@@ -31,9 +31,10 @@ import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import AdminAnalytics from "./pages/adminDashboard/AdminAnalytics";
 import AdminAccountSettings from "./pages/adminDashboard/AdminAccountSettings";
 import ResourceLibrary from "./pages/adminDashboard/ResourceLibrary";
-import ManageCourses from "./pages/adminDashboard/ManageCourses";
+import ManageResources from "./pages/adminDashboard/ManageResources";
 import ManageTests from "./pages/adminDashboard/ManageTests";
 import ManageUsers from "./pages/adminDashboard/ManageUsers";
+import CreateTest from "./pages/adminDashboard/CreateTest";
 
 
 // Layout Pages
@@ -93,9 +94,10 @@ function App() {
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="settings" element={<AdminAccountSettings />} />
               <Route path="resources" element={<ResourceLibrary />} />
-              <Route path="managecourses" element={<ManageCourses />} />
+              <Route path="manageresources" element={<ManageResources />} />
               <Route path="managetests" element={<ManageTests />} />
               <Route path="manageusers" element={<ManageUsers />} />
+              <Route path="createtest" element={<CreateTest />} />
             </Route>
 
             {/* Not Found Route */}
