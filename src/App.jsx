@@ -88,7 +88,7 @@ function App() {
               <Route path="tests" element={<Tests />} />
               <Route path="coursedetails/:id" element={<CourseDetails />} />
               <Route path="mycoursedetails/:id" element={<MyCourseDetails />} /> 
-              <Route path="testinterface/:id" element={<TestInterface  />} />
+              <Route path="testinterface" element={<TestInterface  />} />
             </Route>
 
             {/* Admin Dashboard Routes */}
