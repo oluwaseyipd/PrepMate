@@ -344,6 +344,27 @@ const CreateTest = () => {
                 className="text-gray-700 py-1 px-3 border border-gray-400  rounded-sm w-full h-10"
               />
             </div>
+
+{/* Question image */}
+<div className="flex flex-col gap-3 mb-5">
+  <label htmlFor="questionImage" className="text-black text-xl">
+    Upload Question Image <span className="text-blue-400 text-sm ml-2">(Optional)</span>
+  </label>
+  <input
+    type="file"
+    id="questionImage"
+    name="questionImage"
+    accept="image/*"
+    className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
+               file:rounded-sm file:border-0
+               file:text-sm file:font-semibold
+               file:bg-blue-600 file:text-white cursor-pointer
+               hover:file:bg-blue-500 border border-gray-400 rounded-sm"
+  />
+</div>
+
+
+
             {/* Options */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 ">
               <div className="flex flex-col gap-3 mb-5">
