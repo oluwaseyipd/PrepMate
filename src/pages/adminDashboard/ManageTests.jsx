@@ -26,8 +26,8 @@ const ManageTests = () => {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold text-black mb-5">Manage Tests</h1>
-            <div className="flex justify-between items-center mb-6">
-            <div className="flex items-center relative w-full sm:w-auto bg-blue-50 border border-gray-300 rounded-full p-2">
+            <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
+            <div className="flex items-center relative w-full sm:w-auto bg-blue-50 border border-gray-300 rounded-full p-2 mb-3 md:mb-0">
             <Search size={18} className="mr-2 text-gray-500" />
             <input
               type="text"

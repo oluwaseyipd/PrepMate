@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 // Public Pages
@@ -15,7 +14,7 @@ import ResetPassword from "./pages/authentication/ResetPassword";
 import TwoStepVerification from "./pages/authentication/TwoStepVerification";
 import VerifyEmail from "./pages/authentication/VerifyEmail";
 
-// Users Dashboards Pages
+// Users Dashboard Pages
 import Overview from "./pages/userDashboard/Overview";
 import AllCourses from "./pages/userDashboard/AllCourses";
 import MyCourses from "./pages/userDashboard/MyCourses";
@@ -38,16 +37,17 @@ import ManageTests from "./pages/adminDashboard/ManageTests";
 import ManageUsers from "./pages/adminDashboard/ManageUsers";
 import CreateTest from "./pages/adminDashboard/CreateTest";
 
-
 // Layout Pages
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
-
 
 // Components
 import Loader from "./components/Loader";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./pages/NotFound";
+
+// Contexts
+import { ModalProvider } from "./context/ModalContext";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +61,7 @@ function App() {
       {isLoading ? (
         <Loader />
       ) : (
+        <ModalProvider>
         <Router>
           <ScrollToTop />
           <Routes>
@@ -87,8 +88,8 @@ function App() {
               <Route path="settings" element={<AccountSettings />} />
               <Route path="tests" element={<Tests />} />
               <Route path="coursedetails/:id" element={<CourseDetails />} />
-              <Route path="mycoursedetails/:id" element={<MyCourseDetails />} /> 
-              <Route path="testinterface" element={<TestInterface  />} />
+              <Route path="mycoursedetails/:id" element={<MyCourseDetails />} />
+              <Route path="testinterface" element={<TestInterface />} />
             </Route>
 
             {/* Admin Dashboard Routes */}
@@ -108,7 +109,9 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
+         </ModalProvider>
       )}
+    {/* </ModalProvider> */}
     </>
   );
 }

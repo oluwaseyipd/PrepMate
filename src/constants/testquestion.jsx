@@ -1,3 +1,7 @@
+import questionimage from '../assets/images/questionimage.jpg';
+
+
+
 export const testquestions = [
   {
     id: 1,
@@ -69,7 +73,7 @@ export const testquestions = [
     explanation:
       "The image shows a lion, which is known as the king of the jungle.",
     marks: 1,
-    questionimage: "../assets/images/lion.png",
+    questionimage: questionimage,
   },
   {
     id: 6,
@@ -139,10 +143,10 @@ export const testquestions = [
     answer: "A",
     explanation: "The image shows the Eiffel Tower, located in Paris, France.",
     marks: 1,
-    questionimage: "../assets/images/eiffel_tower.png",
+    questionimage: questionimage,
   },
   {
-    id: 1,
+    id: 11,
     question: "What is the capital of France?",
     options: [
       { option: "A", answer: "Paris" },
@@ -156,7 +160,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 2,
+    id: 12,
     question: "What is 2 + 2?",
     options: [
       { option: "A", answer: "3" },
@@ -170,7 +174,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 3,
+    id: 13,
     question: "Which planet is known as the Red Planet?",
     options: [
       { option: "A", answer: "Earth" },
@@ -185,7 +189,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 4,
+    id: 14,
     question: "What is the chemical symbol for water?",
     options: [
       { option: "A", answer: "O2" },
@@ -199,7 +203,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 5,
+    id: 15,
     question: "Identify the animal in the image.",
     options: [
       { option: "A", answer: "Lion" },
@@ -211,10 +215,10 @@ export const testquestions = [
     explanation:
       "The image shows a lion, which is known as the king of the jungle.",
     marks: 1,
-    questionimage: "../assets/images/lion.png",
+    questionimage: questionimage,
   },
   {
-    id: 6,
+    id: 16,
     question: "What is the largest ocean on Earth?",
     options: [
       { option: "A", answer: "Atlantic Ocean" },
@@ -228,7 +232,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 7,
+    id: 17,
     question: "What is the boiling point of water at sea level?",
     options: [
       { option: "A", answer: "90°C" },
@@ -242,7 +246,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 8,
+    id: 18,
     question: "Which country is known as the Land of the Rising Sun?",
     options: [
       { option: "A", answer: "China" },
@@ -256,7 +260,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 9,
+    id: 19,
     question: "What is the square root of 64?",
     options: [
       { option: "A", answer: "6" },
@@ -270,7 +274,7 @@ export const testquestions = [
     questionimage: null,
   },
   {
-    id: 10,
+    id: 20,
     question: "Identify the structure in the image.",
     options: [
       { option: "A", answer: "Eiffel Tower" },
@@ -281,6 +285,6 @@ export const testquestions = [
     answer: "A",
     explanation: "The image shows the Eiffel Tower, located in Paris, France.",
     marks: 1,
-    questionimage: "../assets/images/eiffel_tower.png",
+    questionimage: questionimage,
   },
 ];
