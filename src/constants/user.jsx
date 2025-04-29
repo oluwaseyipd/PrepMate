@@ -1,5 +1,5 @@
 import { title } from "framer-motion/client";
-import { LayoutDashboard, BookOpen, Bookmark, Clock, CheckCircle, FileText, BarChart } from "lucide-react";
+import { LayoutDashboard, BookOpen, Bookmark, Clock, CheckCircle, FileText, BarChart, Hourglass } from "lucide-react";
 import user1 from "../assets/images/user1.jpeg";
 
 
@@ -11,6 +11,7 @@ export   const navItems = [
   { name: 'Analytics', icon: BarChart, path: '/dashboard/analytics' },
   { name: 'Courses', icon: BookOpen, path: '/dashboard/courses' },
   { name: 'Resources', icon: Bookmark, path: '/dashboard/resources' },
+  { name: 'Take a test', icon: Hourglass, path: '/dashboard/takeatest' },
 ];
 
 

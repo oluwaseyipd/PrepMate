@@ -21,10 +21,12 @@ import AllCourses from "./pages/userDashboard/AllCourses";
 import MyCourses from "./pages/userDashboard/MyCourses";
 import Analytics from "./pages/userDashboard/Analytics";
 import Resources from "./pages/userDashboard/Resources";
+import TakeTest from "./pages/userDashboard/TakeTest";
 import AccountSettings from "./pages/userDashboard/AccountSettings";
 import Tests from "./pages/userDashboard/Tests";
 import CourseDetails from "./pages/userDashboard/CourseDetails";
 import MyCourseDetails from "./pages/userDashboard/MyCourseDetails";
+import TestInterface from "./pages/userDashboard/TestInterface";
 
 // Admin Dashboard Pages
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
@@ -81,10 +83,12 @@ function App() {
               <Route path="mycourses" element={<MyCourses />} />
               <Route path="analytics" element={<Analytics />} />
               <Route path="resources" element={<Resources />} />
+              <Route path="takeatest" element={<TakeTest />} />
               <Route path="settings" element={<AccountSettings />} />
               <Route path="tests" element={<Tests />} />
               <Route path="coursedetails/:id" element={<CourseDetails />} />
               <Route path="mycoursedetails/:id" element={<MyCourseDetails />} /> 
+              <Route path="testinterface/:id" element={<TestInterface  />} />
             </Route>
 
             {/* Admin Dashboard Routes */}

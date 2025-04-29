@@ -81,11 +81,16 @@ const CreateTest = () => {
             Save as Draft
           </Link>
           <Link
-            to="#"
-            className="bg-blue-300 cursor-default text-white px-4 py-2 rounded-full transition duration-300"
-          >
-            Publish Test
-          </Link>
+  to="#"
+  className={`px-4 py-2 rounded-full transition duration-300 ${
+    currentStep === steps[steps.length - 1].id
+      ? "bg-blue-600 hover:bg-blue-500 text-white cursor-pointer"
+      : "bg-blue-300 text-white cursor-default"
+  }`}
+>
+  Publish Test
+</Link>
+
         </div>
       </div>
 
