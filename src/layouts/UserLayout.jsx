@@ -24,37 +24,37 @@ const UserLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <Header toggleSidebar={toggleSidebar} />
-        <main className="p-3 md:p-6 overflow-y-auto h-full">
+        <main className="relative flex-1 p-3 md:p-6 overflow-y-auto h-full">
           <Outlet /> {/* This is where all your pages will show automatically */}
 
 
-                {/* Submit Modal Goes Here */}
-      {showSubmitAlert && (
-        <div className="absolute inset-0 z-50 flex justify-center items-center bg-blue-200 bg-opacity-30 backdrop-blur-sm transition-all ease-out duration-300">
-          <div className="flex flex-col justify-center items-center w-[300px] md:w-[600px] bg-white p-5 rounded-xl shadow-lg scale-100 opacity-100 animate-fade-in">
-            <img src={submitalert} className="w-40 mx-auto" alt="" />
-            <p className="text-black mt-4 text-center">
-              Are you sure you want to submit the test?
-            </p>
-            <div className="flex justify-end gap-10 my-5">
-              <button
-                onClick={() => setShowSubmitAlert(false)}
-                className="bg-white cursor-pointer border border-blue-600 text-blue-600 hover:bg-blue-700 hover:text-white px-4 py-2 rounded-full"
-              >
-                Cancel
-              </button>
-              <button className="bg-blue-600 text-white px-4 py-2 cursor-pointer rounded-full">
-                Submit
-              </button>
+     {/* Modal appears only over the main content */}
+     {showSubmitAlert && (
+            <div className="absolute inset-0 z-40 flex justify-center items-center bg-transparent bg-opacity-30 shadow-xl  backdrop-blur-sm transition-all duration-300">
+              <div className="bg-white p-6 rounded-xl shadow-lg w-[300px] md:w-[500px]">
+                <img src={submitalert} alt="Submit" className="w-40 mx-auto" />
+                <p className="text-center text-black mt-4">
+                  Are you sure you want to submit the test?
+                </p>
+                <div className="flex justify-end gap-4 mt-6">
+                  <button
+                    onClick={() => setShowSubmitAlert(false)}
+                    className="border border-blue-600 cursor-pointer text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-full"
+                  >
+                    Cancel
+                  </button>
+                  <button className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full">
+                    Submit
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
 
       
             {/* Cancel Message */}
             {showCancelAlert && (
-        <div className="absolute inset-0 z-50 flex justify-center items-center bg-blue-200 bg-opacity-30 backdrop-blur-sm transition-all ease-out duration-300">
+        <div className="absolute inset-0 z-50 flex justify-center items-center bg-transparent bg-opacity-30 shadow-xl backdrop-blur-sm transition-all ease-out duration-500">
           <div className="flex flex-col justify-center items-center w-[300px]  md:w-[600px] bg-white p-5 rounded-xl shadow-lg scale-100 opacity-100 animate-fade-in">
             <img src={submitalert} className="w-40 mx-auto" alt="" />
             <p className="text-black text-center mt-4">
