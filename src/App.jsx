@@ -26,6 +26,7 @@ import Tests from "./pages/userDashboard/Tests";
 import CourseDetails from "./pages/userDashboard/CourseDetails";
 import MyCourseDetails from "./pages/userDashboard/MyCourseDetails";
 import TestInterface from "./pages/userDashboard/TestInterface";
+import TestSummary from "./pages/userDashboard/TestSummary";
 
 // Admin Dashboard Pages
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
@@ -90,6 +91,7 @@ function App() {
               <Route path="coursedetails/:id" element={<CourseDetails />} />
               <Route path="mycoursedetails/:id" element={<MyCourseDetails />} />
               <Route path="testinterface" element={<TestInterface />} />
+              <Route path="testsummary" element={<TestSummary/>} />
             </Route>
 
             {/* Admin Dashboard Routes */}

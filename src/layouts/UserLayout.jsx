@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/userDashboard/Sidebar';
 import Header from '../components/userDashboard/Header';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { useModal } from "../context/ModalContext";
 import submitalert from "../assets/images/are-you-sure.png";
 
@@ -43,9 +43,11 @@ const UserLayout = () => {
                   >
                     Cancel
                   </button>
-                  <button className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full">
+                  <Link to={"/dashboard/testsummary"}
+                  onClick={() => setShowSubmitAlert(false)}
+                  className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full">
                     Submit
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
