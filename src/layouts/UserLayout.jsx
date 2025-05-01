@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/userDashboard/Sidebar';
 import Header from '../components/userDashboard/Header';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useModal } from "../context/ModalContext";
+import { useTestResult } from "../context/TestResultContext";
+import { testquestions } from "../constants/testquestion";
 import submitalert from "../assets/images/are-you-sure.png";
 
 const UserLayout = () => {
@@ -12,6 +14,39 @@ const UserLayout = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const { setTestResult } = useTestResult();
+
+  const handleTestSubmit = () => {
+    const endTime = Date.now();
+    const durationInMs = endTime - startTime; // Get startTime from earlier
+    const duration = Math.floor(durationInMs / 60000) + " mins";
+  
+    const correct = userAnswers.filter((ans, idx) => {
+      return ans.selected === testquestions[idx].answer;
+    }).length;
+  
+    const totalQuestions = testquestions.length;
+    const incorrect = totalQuestions - correct;
+    const score = Math.round((correct / totalQuestions) * 100);
+  
+    setTestResult({
+      title: "General Knowledge Test", // or dynamic
+      date: new Date().toLocaleDateString(),
+      duration,
+      totalQuestions,
+      correct,
+      incorrect,
+      score,
+    });
+  };
+
+  // Handling the final submission  
+  const handleFinalSubmit = () => {
+    handleTestSubmit(); // sets result
+    setShowSubmitAlert(false);
+    navigate("/dashboard/testsummary");
   };
 
   return (
@@ -38,13 +73,14 @@ const UserLayout = () => {
                 </p>
                 <div className="flex justify-end gap-4 mt-6">
                   <button
-                    onClick={() => setShowSubmitAlert(false)}
+                      onClick={() => setShowSubmitAlert(false)}
                     className="border border-blue-600 cursor-pointer text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-full"
                   >
                     Cancel
                   </button>
                   <Link to={"/dashboard/testsummary"}
-                  onClick={() => setShowSubmitAlert(false)}
+                   onClick={handleFinalSubmit}
+                  
                   className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full">
                     Submit
                   </Link>

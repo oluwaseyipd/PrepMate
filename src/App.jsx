@@ -49,6 +49,7 @@ import NotFound from "./pages/NotFound";
 
 // Contexts
 import { ModalProvider } from "./context/ModalContext";
+// import { TestResultProvider } from "./context/TestResultContext";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +63,7 @@ function App() {
       {isLoading ? (
         <Loader />
       ) : (
+        // <TestResultProvider>
         <ModalProvider>
         <Router>
           <ScrollToTop />
@@ -112,8 +114,8 @@ function App() {
           </Routes>
         </Router>
          </ModalProvider>
+        //  </TestResultProvider>
       )}
-    {/* </ModalProvider> */}
     </>
   );
 }
