@@ -1,16 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { courses, categoryStyles } from '../../constants/courses';
+import { useModal } from "../../context/ModalContext";
 import { MarsStroke, Share2, Star } from 'lucide-react';
 
 const MyCourseDetails = () => {
+   const { setShowStartTestPrompt } = useModal();
+
   const { id } = useParams();
   const course = courses.find((course) => course.id.toString() === id);
 
   const toTitleCase = (str) =>
     str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 
-  if (!course) return <div className="p-4 text-black">Course not found.</div>;
 
   return (
     <div className="p-4">
@@ -35,6 +37,7 @@ const MyCourseDetails = () => {
               })()}
               <Share2 className="text-gray-700 cursor-pointer" size={25} />
               <button
+               onClick={() => setShowStartTestPrompt(true)}
                 className="px-6 py-1 bg-blue-600 text-white rounded-full cursor-pointer hover:bg-blue-500 transition"
               >
                 Take Test

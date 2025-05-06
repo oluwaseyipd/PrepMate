@@ -11,10 +11,12 @@ const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { showSubmitAlert, setShowSubmitAlert } = useModal();
   const { showCancelAlert, setShowCancelAlert } = useModal();
+  const { showStartTestPrompt, setShowStartTestPrompt } = useModal();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  
 
   const { setTestResult } = useTestResult();
 
@@ -62,8 +64,35 @@ const UserLayout = () => {
         <main className="relative flex-1 p-3 md:p-6 overflow-y-auto h-full">
           <Outlet /> {/* This is where all your pages will show automatically */}
 
+      {/* Start test Message */}
+      {showStartTestPrompt && (
+  <div className="absolute inset-0 z-40 flex justify-center items-center bg-transparent bg-opacity-30 shadow-xl backdrop-blur-sm transition-all duration-300">
+    <div className="bg-white p-6 rounded-xl shadow-lg w-[300px] md:w-[500px]">
+      <img src={submitalert} alt="Start" className="w-40 mx-auto" />
+      <p className="text-center text-black mt-4">
+        Are you sure you want to start the test?
+      </p>
+      <div className="flex justify-end gap-4 mt-6">
+        <button
+          onClick={() => setShowStartTestPrompt(false)}
+          className="border border-blue-600 cursor-pointer text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-full"
+        >
+          Cancel
+        </button>
+        <Link
+          to={"/dashboard/testinterface"}
+          onClick={() => setShowStartTestPrompt(false)}
+          className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full"
+        >
+          Start
+        </Link>
+      </div>
+    </div>
+  </div>
+)}
 
-     {/* Modal appears only over the main content */}
+
+     {/* Submit Message */}
      {showSubmitAlert && (
             <div className="absolute inset-0 z-40 flex justify-center items-center bg-transparent bg-opacity-30 shadow-xl  backdrop-blur-sm transition-all duration-300">
               <div className="bg-white p-6 rounded-xl shadow-lg w-[300px] md:w-[500px]">

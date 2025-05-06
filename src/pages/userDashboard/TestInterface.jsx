@@ -1,17 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { courses } from "../../constants/courses";
 import { testquestions } from "../../constants/testquestion";
 import { useModal } from "../../context/ModalContext";
 import { useTestResult } from "../../context/TestResultContext";
 
 const TestInterface = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const courseId = location.state?.courseId;
+
+  const course = courses.find((c) => c.id === courseId);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const { setShowSubmitAlert, setShowCancelAlert } = useModal();
   const { setTestResult } = useTestResult();
 
   const currentQuestion = testquestions[currentQuestionIndex];
-  const [startTime] = useState(Date.now());
+
+  // Extract time in seconds from duration (e.g., "36 mins")
+  const testDurationSeconds = course ? parseInt(course.duration) * 60 : 1800;
+
+  const [timeLeft, setTimeLeft] = useState(testDurationSeconds);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleTestSubmit();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
+    return `${m}:${s}`;
+  };
 
   const handleAnswerSelect = (questionId, selectedOption) => {
     setAnswers((prev) => ({
@@ -29,11 +62,10 @@ const TestInterface = () => {
     });
 
     const score = Math.round((numCorrect / totalQuestions) * 100);
-    const timeTakenMs = Date.now() - startTime;
-    const timeTaken = Math.round(timeTakenMs / 60000) + " mins";
+    const timeTaken = formatTime(testDurationSeconds - timeLeft);
 
     const result = {
-      testTitle: "General Knowledge",
+      testTitle: course?.title || "Untitled Test",
       date: new Date().toLocaleDateString(),
       duration: timeTaken,
       totalQuestions,
@@ -44,7 +76,7 @@ const TestInterface = () => {
     };
 
     setTestResult(result);
-    // Navigate to summary page (if routing is set up)
+    navigate("/test-summary");
   };
 
   return (
@@ -55,10 +87,14 @@ const TestInterface = () => {
           {/* Test Info Boxes */}
           <div className="flex flex-wrap md:flex-nowrap items-center gap-3 md:gap-10">
             {[
-              { title: "Subject", value: "Mathematics" },
-              { title: "Total Score", value: "40 Marks" },
-              { title: "Total Time", value: "30 Minutes" },
-              { title: "Time Remaining", value: "30:00", large: true },
+              { title: "Subject", value: course?.category || "N/A" },
+              { title: "Total Score", value: `${testquestions.length * 1} Marks` },
+              { title: "Total Time", value: course?.duration || "30 mins" },
+              {
+                title: "Time Remaining",
+                value: formatTime(timeLeft),
+                large: true,
+              },
             ].map((info, idx) => (
               <div
                 key={idx}
@@ -70,6 +106,10 @@ const TestInterface = () => {
                 <p
                   className={`text-black ${
                     info.large ? "font-bold text-3xl" : ""
+                  } ${
+                    info.title === "Time Remaining" && timeLeft <= 60
+                      ? "text-red-600"
+                      : ""
                   }`}
                 >
                   {info.value}
@@ -78,9 +118,8 @@ const TestInterface = () => {
             ))}
           </div>
 
-          {/* Question Box */}
+          {/* Question Display */}
           <div className="flex flex-col gap-2 bg-white p-5 rounded-lg shadow-md">
-            {/* Question Header */}
             <div className="flex justify-center items-center gap-2">
               <h2 className="text-blue-600 font-bold text-xl md:text-3xl">
                 Question:
@@ -90,7 +129,6 @@ const TestInterface = () => {
               </p>
             </div>
 
-            {/* Question Text & Image */}
             <div className="flex flex-col gap-3 mb-5">
               <p className="text-black mb-3 select-none">
                 {currentQuestion.question}
@@ -104,7 +142,6 @@ const TestInterface = () => {
               )}
             </div>
 
-            {/* Options */}
             <div className="flex flex-col gap-3">
               {currentQuestion.options.map((opt, i) => (
                 <div key={opt.option} className="flex gap-2 items-center">
@@ -131,7 +168,6 @@ const TestInterface = () => {
               ))}
             </div>
 
-            {/* Navigation */}
             <div className="flex items-center justify-center md:justify-end gap-10 mt-5">
               <button
                 onClick={() =>
@@ -198,7 +234,7 @@ const TestInterface = () => {
             <button
               onClick={() => {
                 setShowSubmitAlert(true);
-                handleTestSubmit(); // You can delay this until "Yes" on confirmation if needed
+                handleTestSubmit(); // Could wrap this in confirmation modal
               }}
               className="mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
