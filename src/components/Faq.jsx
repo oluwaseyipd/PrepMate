@@ -1,10 +1,20 @@
 import React, { useState } from "react";
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import { faqs } from "../constants";
 import expand from "../assets/images/icons/expand.png";
 import collapse from "../assets/images/icons/collapse.png";
 import shape1 from "../assets/images/shapes/shape-1.png";
 
 const Faq = () => {
+      useEffect(() => {
+        AOS.init({
+          duration: 1000, // Optional: animation duration in ms
+          once: true,     // Optional: whether animation should happen only once
+        });
+      }, []);
+
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -15,7 +25,7 @@ const Faq = () => {
     <section className="w-full py-16 bg-white mt-6 md:mt-16">
       <div className="container mx-auto px-4 flex flex-col md:flex-row gap-8 items-start">
         {/* Left Side - Subscription Form */}
-        <div className="relative space-y-6 flex-1">
+        <div className="relative space-y-6 flex-1" data-aos="fade-right">
           <div className="absolute -top-3 right-0 md:right-40 w-16 h-16">
             <img src={shape1} alt="Lot Of Choices" className="w-32" />
           </div>
@@ -38,7 +48,7 @@ const Faq = () => {
         </div>
 
         {/* Right Side - FAQ List */}
-        <div className="flex-1 space-y-4">
+        <div className="flex-1 space-y-4" data-aos="fade-left">
           <h3 className="text-xl md:text-2xl mt-6 md:mt-0 font-medium text-gray-900">
             Maybe your question has already been answered, check this out.
           </h3>

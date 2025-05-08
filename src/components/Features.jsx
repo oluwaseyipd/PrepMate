@@ -1,4 +1,7 @@
 import React from 'react';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import categories from "../assets/images/features/categories.png";
 import leaderboard from "../assets/images/features/leaderboard.png";
 import progress from "../assets/images/features/Progress.png";
@@ -6,13 +9,19 @@ import timed from "../assets/images/features/timed.png";
 import shape1 from "../assets/images/shapes/shape-2.png";
 
 const Features = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Optional: animation duration in ms
+      once: true,     // Optional: whether animation should happen only once
+    });
+  }, []);
   return (
     <section className="w-full py-16 bg-white">
       <div className="container mx-auto px-4">
         {/* Header and Features in Flex */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12">
           {/* Header */}
-          <div className="relative lg:max-w-md space-y-4 flex-shrink-0">
+          <div className="relative lg:max-w-md space-y-4 flex-shrink-0" data-aos="fade-right">
             {/* Decorative Shape */}
             <div className="absolute -top-10 -left-10 w-16 h-16">
               <img src={shape1} alt="Decorative Shape" className="w-32" />
@@ -28,7 +37,7 @@ const Features = () => {
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 flex-grow">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 flex-grow" data-aos="fade-left">
             {/* Feature Items */}
             {[
               { img: progress, title: "Track Your Progress ", desc: "Monitor your performance over time and see where you’re improving." },
@@ -38,7 +47,10 @@ const Features = () => {
               // { img: leaderboard, title: "Expert Guidance", desc: "Expert-led sessions for the best camping experiences." },
               // { img: progress, title: "Customer Support", desc: "24/7 dedicated customer support service." }
             ].map((feature, index) => (
-              <div key={index} className="flex flex-col items-center md:items-start mt-6 md:mt-0 space-y-4">
+              <div key={index} className="flex flex-col items-center md:items-start mt-6 md:mt-0 space-y-4"
+              data-aos="fade-up"
+    data-aos-delay={index * 200} // 0ms, 200ms, 400ms, 600ms
+    data-aos-duration="800">
                 <img src={feature.img} alt={feature.title} className="w-16 h-16" />
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900">{feature.title}</h3>
                 <p className="text-gray-500 text-sm md:text-base">

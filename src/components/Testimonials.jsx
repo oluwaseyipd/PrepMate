@@ -1,4 +1,7 @@
 import React from "react";
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import Slider from "react-slick";
 import { userTestimony } from "../constants";
 import "slick-carousel/slick/slick.css";
@@ -7,6 +10,13 @@ import shape1 from "../assets/images/shapes/shape-2.png";
 
 
 const testimonials = () => {
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1000, // Optional: animation duration in ms
+        once: true,     // Optional: whether animation should happen only once
+      });
+    }, []);
   // Slider settings
   const settings = {
     dots: false,
@@ -35,7 +45,7 @@ const testimonials = () => {
 
   return (
     <section className="w-full py-16 bg-white  mt-6 md:mt-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4"  data-aos="fade-up">
         {/* Heading */}
         <div className="relative text-left space-y-4 mb-12 max-w-xl mx-auto md:mx-0">
           {/* Decorative Shape */}
