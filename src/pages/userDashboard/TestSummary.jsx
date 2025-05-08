@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { testquestions } from "../../constants/testquestion";
 import { useTestResult } from "../../context/TestResultContext";
+import { ArrowDown } from "lucide-react";
+import jsPDF from "jspdf";
 
 const TestSummary = () => {
   const { testResult } = useTestResult();
@@ -14,6 +16,94 @@ const TestSummary = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    
+    // PDF Setup
+    const margin = 20;
+    const lineHeight = 10;
+    let yPosition = margin;
+    
+    // Add title
+    doc.setFontSize(20);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${testResult.testTitle} Summary`, margin, yPosition);
+    yPosition += lineHeight * 2;
+    
+    // Add test info
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Date: ${testResult.date}`, margin, yPosition);
+    yPosition += lineHeight;
+    doc.text(`Duration: ${testResult.duration}`, margin, yPosition);
+    yPosition += lineHeight;
+    doc.text(`Total Questions: ${testResult.totalQuestions}`, margin, yPosition);
+    yPosition += lineHeight;
+    doc.text(`Score: ${testResult.score}%`, margin, yPosition);
+    yPosition += lineHeight;
+    doc.text(`Correct Answers: ${testResult.correct}`, margin, yPosition);
+    yPosition += lineHeight;
+    doc.text(`Incorrect Answers: ${testResult.incorrect}`, margin, yPosition);
+    yPosition += lineHeight * 2;
+
+    
+    // Process each question
+    testquestions.forEach((q, index) => {
+      const userAnswer = testResult.userAnswers[q.id];
+      const isCorrect = userAnswer === q.answer;
+      
+      // Add question with number
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${index + 1}. ${q.question}`, margin, yPosition);
+      yPosition += lineHeight;
+      
+      // Add options
+      doc.setFont("helvetica", "normal");
+      
+      // Handle options with the specific format: {option: "A", answer: "Paris"}
+      if (q.options) {
+        q.options.forEach((option, optIndex) => {
+          // Check if option is an object with the expected structure
+          if (typeof option === 'object' && option !== null && option.option && option.answer) {
+            // Format as "A. Paris"
+            doc.text(`${option.option}. ${option.answer}`, margin + 5, yPosition);
+          } else {
+            // Fallback for any other format
+            let optionText = option;
+            if (typeof option === 'object' && option !== null) {
+              optionText = JSON.stringify(option);
+            }
+            doc.text(`${String.fromCharCode(97 + optIndex)}. ${optionText}`, margin + 5, yPosition);
+          }
+          yPosition += lineHeight;
+        });
+      }
+      
+      // Add correct answer
+      doc.setFont("helvetica", "bold");
+      doc.text(`Correct answer: ${q.answer}`, margin + 10, yPosition);
+      
+      // Add user's answer and status
+      yPosition += lineHeight;
+      const answerText = `Your answer: ${userAnswer || "No answer"} (${isCorrect ? "Correct" : "Incorrect"})`;
+      doc.setTextColor(isCorrect ? 0 : 255, isCorrect ? 128 : 0, 0);
+      doc.text(answerText, margin + 10, yPosition);
+      doc.setTextColor(0, 0, 0); // Reset text color
+      
+      yPosition += lineHeight * 2;
+      
+      // Check if we need a new page
+      if (yPosition > 270) {
+        doc.addPage();
+        yPosition = margin;
+      }
+    });
+    
+    // Save the PDF
+    doc.save(`${testResult.testTitle}_Summary.pdf`);
   };
 
   if (!testResult) {
@@ -54,6 +144,13 @@ const TestSummary = () => {
               onClick={() => navigate("/dashboard/testinterface")}
             >
               Retake Test
+            </button>
+            <button
+              className="flex justify-center items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mt-4 transition duration-300"
+              onClick={downloadPDF}
+            >
+              <ArrowDown className="mr-2 text-white" size={18}/>
+              Download Summary
             </button>
           </div>
         </div>

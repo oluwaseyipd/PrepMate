@@ -10,13 +10,14 @@ const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const courseId = location.state?.courseId;
-
+  
   const course = courses.find((c) => c.id === courseId);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const { setShowSubmitAlert, setShowCancelAlert } = useModal();
-  const { setTestResult } = useTestResult();
+  const { updateTestResult } = useTestResult(); // Changed to use updateTestResult instead of setTestResult
+  const [startTime] = useState(Date.now());
 
   const currentQuestion = testquestions[currentQuestionIndex];
 
@@ -56,9 +57,16 @@ const TestInterface = () => {
   const handleTestSubmit = () => {
     const totalQuestions = testquestions.length;
     let numCorrect = 0;
+    const correctAnswers = [];
+    const wrongAnswers = [];
 
     testquestions.forEach((q) => {
-      if (answers[q.id] === q.answer) numCorrect += 1;
+      if (answers[q.id] === q.answer) {
+        numCorrect += 1;
+        correctAnswers.push(q.id);
+      } else {
+        wrongAnswers.push(q.id);
+      }
     });
 
     const score = Math.round((numCorrect / totalQuestions) * 100);
@@ -73,10 +81,17 @@ const TestInterface = () => {
       correct: numCorrect,
       incorrect: totalQuestions - numCorrect,
       userAnswers: answers,
+      correctAnswers,
+      wrongAnswers,
+      timeTaken,
+      submitted: true,
+      testId: courseId || 'default'
     };
 
-    setTestResult(result);
-    navigate("/test-summary");
+    // Use updateTestResult instead of setTestResult
+    updateTestResult(result);
+    console.log("Submitted Result:", result);
+    return result;
   };
 
   return (
@@ -233,8 +248,8 @@ const TestInterface = () => {
 
             <button
               onClick={() => {
-                setShowSubmitAlert(true);
-                handleTestSubmit(); // Could wrap this in confirmation modal
+                handleTestSubmit(); // Calculate the result
+                setShowSubmitAlert(true); // Show the confirmation modal
               }}
               className="mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
             >
