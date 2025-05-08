@@ -58,6 +58,26 @@ const UserLayout = () => {
     }
   };
 
+  // Handle test start confirmation
+  const handleStartTestConfirm = () => {
+    // Reset the modal state
+    setShowStartTestPrompt({
+      show: false,
+      courseId: null,
+      onConfirm: null
+    });
+    
+    // Call the onConfirm function if it exists
+    if (showStartTestPrompt.onConfirm && typeof showStartTestPrompt.onConfirm === 'function') {
+      showStartTestPrompt.onConfirm();
+    } else {
+      // Fallback to the original behavior if no function is provided
+      navigate("/dashboard/testinterface", { 
+        state: { courseId: showStartTestPrompt.courseId }
+      });
+    }
+  };
+
   return (
     <div className="relative flex h-screen bg-blue-50">
       {/* Sidebar */}
@@ -72,7 +92,7 @@ const UserLayout = () => {
           <Outlet /> {/* This is where all your pages will show automatically */}
 
           {/* Start test Message */}
-          {showStartTestPrompt && (
+          {showStartTestPrompt.show && (
             <div className="absolute inset-0 z-40 flex justify-center items-center bg-transparent bg-opacity-30 shadow-xl backdrop-blur-sm transition-all duration-300">
               <div className="bg-white p-6 rounded-xl shadow-lg w-[300px] md:w-[500px]">
                 <img src={submitalert} alt="Start" className="w-40 mx-auto" />
@@ -81,18 +101,21 @@ const UserLayout = () => {
                 </p>
                 <div className="flex justify-end gap-4 mt-6">
                   <button
-                    onClick={() => setShowStartTestPrompt(false)}
+                    onClick={() => setShowStartTestPrompt({
+                      show: false,
+                      courseId: null,
+                      onConfirm: null
+                    })}
                     className="border border-blue-600 cursor-pointer text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 rounded-full"
                   >
                     Cancel
                   </button>
-                  <Link
-                    to={"/dashboard/testinterface"}
-                    onClick={() => setShowStartTestPrompt(false)}
+                  <button
+                    onClick={handleStartTestConfirm}
                     className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full"
                   >
                     Start
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

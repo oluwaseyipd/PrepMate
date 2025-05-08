@@ -1,11 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { courses, categoryStyles } from '../../constants/courses';
 import { useModal } from "../../context/ModalContext";
 import { MarsStroke, Share2, Star } from 'lucide-react';
 
 const MyCourseDetails = () => {
-   const { setShowStartTestPrompt } = useModal();
+  const { setShowStartTestPrompt } = useModal();
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const course = courses.find((course) => course.id.toString() === id);
@@ -13,6 +14,30 @@ const MyCourseDetails = () => {
   const toTitleCase = (str) =>
     str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 
+  // Handle confirming test start
+  const handleConfirmStartTest = () => {
+    // Store in context or directly navigate with state
+    navigate('/dashboard/testinterface', { 
+      state: { 
+        courseId: course.id,
+        courseTitle: course.title,
+        courseCategory: course.category,
+        courseDuration: course.duration
+      } 
+    });
+  };
+
+  // We'll use this in the Modal component to pass the handleConfirmStartTest function
+  React.useEffect(() => {
+    if (course) {
+      // Pass both the course ID and the confirmation handler to the modal context
+      setShowStartTestPrompt({
+        show: false,
+        courseId: course.id,
+        onConfirm: handleConfirmStartTest
+      });
+    }
+  }, [course, setShowStartTestPrompt]);
 
   return (
     <div className="p-4">
@@ -37,7 +62,7 @@ const MyCourseDetails = () => {
               })()}
               <Share2 className="text-gray-700 cursor-pointer" size={25} />
               <button
-               onClick={() => setShowStartTestPrompt(true)}
+                onClick={() => setShowStartTestPrompt({ show: true, courseId: course.id, onConfirm: handleConfirmStartTest })}
                 className="px-6 py-1 bg-blue-600 text-white rounded-full cursor-pointer hover:bg-blue-500 transition"
               >
                 Take Test

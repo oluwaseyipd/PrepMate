@@ -29,7 +29,7 @@ const TestSummary = () => {
     // Add title
     doc.setFontSize(20);
     doc.setFont("helvetica", "bold");
-    doc.text(`${testResult.testTitle} Summary`, margin, yPosition);
+    doc.text(`${testResult.testTitle} Test Summary`, margin, yPosition);
     yPosition += lineHeight * 2;
     
     // Add test info

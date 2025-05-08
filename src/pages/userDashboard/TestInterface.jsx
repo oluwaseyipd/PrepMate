@@ -9,20 +9,31 @@ import { useTestResult } from "../../context/TestResultContext";
 const TestInterface = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const courseId = location.state?.courseId;
   
+  // Get course details from location state
+  const courseId = location.state?.courseId;
+  const courseTitle = location.state?.courseTitle;
+  const courseCategory = location.state?.courseCategory;
+  const courseDuration = location.state?.courseDuration;
+  
+  // Fallback to finding course if not passed via state
   const course = courses.find((c) => c.id === courseId);
+  
+  // Use passed values first, then fallback to found course
+  const testTitle = courseTitle || (course?.title || "Untitled Test");
+  const testCategory = courseCategory || (course?.category || "N/A");
+  const testDuration = courseDuration || (course?.duration || "30 mins");
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const { setShowSubmitAlert, setShowCancelAlert } = useModal();
-  const { updateTestResult } = useTestResult(); // Changed to use updateTestResult instead of setTestResult
+  const { updateTestResult } = useTestResult();
   const [startTime] = useState(Date.now());
 
   const currentQuestion = testquestions[currentQuestionIndex];
 
   // Extract time in seconds from duration (e.g., "36 mins")
-  const testDurationSeconds = course ? parseInt(course.duration) * 60 : 1800;
+  const testDurationSeconds = parseInt(testDuration) * 60 || 1800;
 
   const [timeLeft, setTimeLeft] = useState(testDurationSeconds);
 
@@ -73,7 +84,7 @@ const TestInterface = () => {
     const timeTaken = formatTime(testDurationSeconds - timeLeft);
 
     const result = {
-      testTitle: course?.title || "Untitled Test",
+      testTitle: testTitle,
       date: new Date().toLocaleDateString(),
       duration: timeTaken,
       totalQuestions,
@@ -88,7 +99,6 @@ const TestInterface = () => {
       testId: courseId || 'default'
     };
 
-    // Use updateTestResult instead of setTestResult
     updateTestResult(result);
     console.log("Submitted Result:", result);
     return result;
@@ -99,12 +109,17 @@ const TestInterface = () => {
       <div className="flex flex-col md:flex-row gap-10">
         {/* Left Panel */}
         <div className="flex flex-col gap-5 w-full md:w-2/3">
+          {/* Test Info and Title */}
+          <div className="bg-white p-5 rounded-lg shadow-md mb-3">
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-600">{testTitle}</h1>
+          </div>
+          
           {/* Test Info Boxes */}
           <div className="flex flex-wrap md:flex-nowrap items-center gap-3 md:gap-10">
             {[
-              { title: "Subject", value: course?.category || "N/A" },
+              { title: "Subject", value: testCategory },
               { title: "Total Score", value: `${testquestions.length * 1} Marks` },
-              { title: "Total Time", value: course?.duration || "30 mins" },
+              { title: "Total Time", value: testDuration },
               {
                 title: "Time Remaining",
                 value: formatTime(timeLeft),
