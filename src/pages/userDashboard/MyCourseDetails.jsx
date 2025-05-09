@@ -6,7 +6,7 @@ import { MarsStroke, Share2, Star } from 'lucide-react';
 
 const MyCourseDetails = () => {
   const { setShowStartTestPrompt } = useModal();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const { id } = useParams();
   const course = courses.find((course) => course.id.toString() === id);

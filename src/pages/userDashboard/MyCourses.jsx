@@ -82,7 +82,7 @@ const MyCourses = () => {
                     <Clock className="text-blue-500" size={15} /> {course.duration}
                   </span>
                 </div>
-                <div className="flex justify-between items-center gap-3 mt-3">
+                <div className="flex justify-between items-center gap-3 mt-3"> 
                   <div className="flex items-center gap-1">
                     <Star className="text-yellow-500" size={15} />
                     <span className="text-sm text-black">{course.rating}</span>

@@ -12,7 +12,7 @@ const COURSES_PER_PAGE = 12;
 const TakeTest = () => {
   const { setShowStartTestPrompt } = useModal();
 
-  const [submittedCourses, setSubmittedCourses] = useState([]);
+  const [submittedCourses, setSubmittedCourses] = useState([]); 
 
   const [currentPage, setCurrentPage] = useState(1);
 

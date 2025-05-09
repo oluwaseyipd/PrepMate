@@ -138,7 +138,7 @@ const UserLayout = () => {
                   </button>
                   <button
                     onClick={handleFinalSubmit} // Call handleFinalSubmit here
-                    className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full"
+                    className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full" 
                   >
                     Submit
                   </button>
