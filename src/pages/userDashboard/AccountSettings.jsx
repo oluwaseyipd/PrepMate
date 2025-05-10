@@ -16,7 +16,6 @@ const AccountSettings = () => {
   const [expandedNotification, setExpandedNotification] = useState(null);
   const [readNotifications, setReadNotifications] = useState([]);
 
-
   // Changing Profile Banner
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/*",
@@ -29,22 +28,20 @@ const AccountSettings = () => {
       reader.readAsDataURL(file);
     },
   });
-   
-// Changing Profile Picture
+
+  // Changing Profile Picture
   const fileInputRef = React.useRef();
 
-const handleProfileImageChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileImage(reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
-
+  const handleProfileImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const toggleNotification = (id) => {
     setExpandedNotification(expandedNotification === id ? null : id);
@@ -55,49 +52,46 @@ const handleProfileImageChange = (event) => {
 
   return (
     <div className="bg-blue-50 min-h-screen p-2 md:p-6">
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="relative">
-          <div
-            className="h-32 bg-cover bg-center rounded-t-lg"
-            style={{ backgroundImage: `url(${banner})` }}
-          ></div>
-          
-            {/* <img
+      <div className="relative">
+        {/* Profile Banner*/}
+        <div
+          className="h-32 bg-cover bg-center rounded-t-lg"
+          style={{ backgroundImage: `url(${banner})` }}
+        ></div>
+        {/* <img
             src={user1}
             alt="User Profile"
             className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-8 left-4 transform translate-y-1/2"
           /> */}
-
-<div className="relative">
-  <img
-    src={profileImage}
-    alt="User Profile"
-    className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-1 left-4 transform translate-y-1/2"
-  />
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleProfileImageChange}
-    ref={fileInputRef}
-    className="hidden"
-  />
-  <PlusCircle
-    className="text-blue-500 absolute bottom-6 left-15 md:left-25 transform translate-x-1/2 translate-y-1/2 bg-white rounded-full p-[2px] md:p-1 cursor-pointer"
-    size={30}
-    onClick={() => fileInputRef.current.click()}
-  />
-</div>
-          
-          
-          <div
-            {...getRootProps()}
-            className="bg-transparent border text-gray-200 border-gray-400  px-5 py-1  text-sm md:text-lg rounded-full absolute top-6 right-3 cursor-pointer"
-          >
-            <input {...getInputProps()} />
-            Change Cover
-          </div>{" "}
+        <div className="relative">
+          <img
+            src={profileImage}
+            alt="User Profile"
+            className="w-20 md:w-30 h-20 md:h-30 rounded-full border-4 border-white absolute bottom-1 left-4 transform translate-y-1/2"
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfileImageChange}
+            ref={fileInputRef}
+            className="hidden"
+          />
+          <PlusCircle
+            className="text-blue-500 absolute bottom-6 left-15 md:left-25 transform translate-x-1/2 translate-y-1/2 bg-white rounded-full p-[2px] md:p-1 cursor-pointer"
+            size={30}
+            onClick={() => fileInputRef.current.click()}
+          />
         </div>
-        <div className="mt-15 md:mt-6 md:pl-40">
+        <div
+          {...getRootProps()}
+          className="bg-transparent border text-gray-200 border-gray-400  px-5 py-1  text-sm md:text-lg rounded-full absolute top-6 right-3 cursor-pointer"
+        >
+          <input {...getInputProps()} />
+          Change Cover
+        </div>{" "}
+      </div>
+      <div className="bg-white shadow rounded-b-lg p-6">
+        <div className="mt-15 md:mt-1 md:pl-40">
           <h2 className="text-2xl text-black font-semibold">Mohid Khan</h2>
           <p className="text-gray-500 text-sm">
             UX Designer | San Francisco | Joined August 2024
@@ -124,13 +118,12 @@ const handleProfileImageChange = (event) => {
       <div className="bg-white shadow rounded-lg p-6 mt-6">
         {activeSection === "details" && (
           <>
-          <div className="border-b border-gray-400 pb-4 mb-4">
-             <h3 className="text-lg text-black font-semibold">My Details</h3>
-            <p className="text-gray-800">
-              Please fill full details about yourself
-            </p>
-          </div>
-           
+            <div className="border-b border-gray-400 pb-4 mb-4">
+              <h3 className="text-lg text-black font-semibold">My Details</h3>
+              <p className="text-gray-800">
+                Please fill full details about yourself
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
@@ -168,25 +161,23 @@ const handleProfileImageChange = (event) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <div>
-            <label className="text-gray-600">Role</label>
-            <input
-              type="text"
-              className="w-full border border-gray-300 text-black p-2 rounded mt-1"
-              placeholder="Enter Role"
-            />
-          </div>
-          <div>
-            <label className="text-gray-600">Country</label>
-            <input
-              type="text"
-              className="w-full border border-gray-300 text-black p-2 rounded mt-1"
-              placeholder="Enter Country"
-            />
-          </div>
-          
-
-          </div>
+              <div>
+                <label className="text-gray-600">Role</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 text-black p-2 rounded mt-1"
+                  placeholder="Enter Role"
+                />
+              </div>
+              <div>
+                <label className="text-gray-600">Country</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 text-black p-2 rounded mt-1"
+                  placeholder="Enter Country"
+                />
+              </div>
+            </div>
 
             {/* Upload image */}
             <div className="mt-4">
@@ -343,33 +334,53 @@ const handleProfileImageChange = (event) => {
           </>
         )}
 
+        {/* Notification */}
 
-                {/* Notification */}
-
-                {activeSection === 'notification' && (
+        {activeSection === "notification" && (
           <>
-             <div className="border-b border-gray-400 pb-4 mb-4">
-             <h3 className="text-lg text-black font-semibold">Notification</h3>
-            <p className="text-gray-800">
-              Check new updates
-            </p>
-          </div>
+            <div className="border-b border-gray-400 pb-4 mb-4">
+              <h3 className="text-lg text-black font-semibold">Notification</h3>
+              <p className="text-gray-800">Check new updates</p>
+            </div>
             <div className="mt-4 space-y-4">
               {notifications.map((notification) => (
-                <div key={notification.id} className="bg-white shadow rounded-lg p-4 flex items-start space-x-4">
-                  <img src={notification.image} alt="Notification" className="w-12 h-12 rounded-full" />
+                <div
+                  key={notification.id}
+                  className="bg-white shadow rounded-lg p-4 flex items-start space-x-4"
+                >
+                  <img
+                    src={notification.image}
+                    alt="Notification"
+                    className="w-12 h-12 rounded-full"
+                  />
                   <div className="flex-1">
-                    <h4 className={`text-lg font-semibold ${readNotifications.includes(notification.id) ? 'text-gray-500' : 'text-black'}`}>
+                    <h4
+                      className={`text-lg font-semibold ${
+                        readNotifications.includes(notification.id)
+                          ? "text-gray-500"
+                          : "text-black"
+                      }`}
+                    >
                       {notification.title}
                     </h4>
-                    <p className={`text-gray-500 ${readNotifications.includes(notification.id) ? 'text-gray-500' : 'text-black'}`}>
-                      {expandedNotification === notification.id ? notification.content : `${notification.content.substring(0, 100)}...`}
+                    <p
+                      className={`text-gray-500 ${
+                        readNotifications.includes(notification.id)
+                          ? "text-gray-500"
+                          : "text-black"
+                      }`}
+                    >
+                      {expandedNotification === notification.id
+                        ? notification.content
+                        : `${notification.content.substring(0, 100)}...`}
                     </p>
                     <button
                       className="text-blue-600 cursor-pointer hover:underline mt-2"
                       onClick={() => toggleNotification(notification.id)}
                     >
-                      {expandedNotification === notification.id ? 'Close' : 'Open'}
+                      {expandedNotification === notification.id
+                        ? "Close"
+                        : "Open"}
                     </button>
                   </div>
                 </div>
@@ -377,13 +388,9 @@ const handleProfileImageChange = (event) => {
             </div>
           </>
         )}
-
       </div>
     </div>
-
-
-
-);
+  );
 };
 
 export default AccountSettings;

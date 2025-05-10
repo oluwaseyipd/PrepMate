@@ -1,23 +1,23 @@
 import React from "react";
-import { DayPicker } from "react-day-picker";
-import { format } from 'date-fns';
-import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import { data, overview, recentTest, activities } from "../../constants/user";
+import Calendar from "../../components/Calendar";
+import StudyStat from "../../components/charts/StudyStat";
 import welcomeAvatar from "../../assets/images/signin.png";
 import "react-day-picker/dist/style.css";
 import { FaClock } from "react-icons/fa";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 
 const Overview = () => {
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1000, // Optional: animation duration in ms
+        once: true,     // Optional: whether animation should happen only once
+      });
+    }, []);
+
   // Function to calculate time ago
   const timeAgo = (timestamp) => {
     const now = new Date();
@@ -40,7 +40,7 @@ const Overview = () => {
       <div className="lg:col-span-2">
         <div className="flex bg-blue-500 text-white px-5 pt-2 rounded-lg items-center justify-between">
           <div>
-            <h1 className="text-2xl md:text-4xlfont-bold">
+            <h1 className="text-2xl md:text-4xl">
               Welcome back, John 👋{" "}
             </h1>
             <p className=" mb-3 ">Ready to ace your next test?</p>
@@ -57,61 +57,45 @@ const Overview = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mt-10">
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg">
+          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="200"> 
             <FaClock className="text-pink-500 text-xl bg-pink-300 p-3 h-12 w-12 rounded-full" />
             <h2 className="mt-3 text-xl text-black">Total Tests Taken</h2>
           </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg">
+          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="400"> 
             <FaClock className="text-blue-500 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
             <h2 className="mt-3 text-xl text-black">Average Score</h2>
           </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg">
+          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="600"> 
             <FaClock className="text-green-500 text-xl bg-green-300 p-3 h-12 w-12 rounded-full" />
             <h2 className="mt-3 text-xl text-black">Best Performance</h2>
           </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg">
+          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="800"> 
             <FaClock className="text-yellow-500 text-xl bg-yellow-300 p-3 h-12 w-12 rounded-full" />
             <h2 className="mt-3 text-xl text-black">Courses Enrolled</h2>
           </div>
         </div>
 
         {/* Statistics */}
-        <div className="bg-white shadow-sm rounded-lg p-4 border mt-10">
-          <h3 className="text-lg text-black font-semibold pb-4 border-b border-gray-300">
-            Test Performance
-          </h3>
-          <div className="mt-5">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={overview}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="score"
-                  stroke="#8884d8"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+        <div data-aos="fade-up">
+ <StudyStat />
         </div>
+         
+
 
         {/* Recent Activities */}
-        <div className="bg-white shadow-sm rounded-lg p-4 border mt-10">
+        <div className="bg-white shadow-sm rounded-lg p-4 border mt-10" data-aos="fade-left" data-aos-delay="1200">
           <h3 className="text-lg text-black font-semibold pb-4 border-b border-gray-300">
             Recent Activities
           </h3>
-          <table className="w-full text-sm text-left text-gray-700 mt-5">
+          <div className="overflow-x-auto w-full">
+          <table className="min-w-full text-sm text-left text-gray-700 mt-5">
             <thead className="text-xs text-gray-500 uppercase border-b">
               <tr>
-                <th className="py-3 text-black">Course Title</th>
-                <th className="py-3 text-black">Date</th>
-                <th className="py-3 text-black">Duration</th>
-                <th className="py-3 text-black">Score</th>
-                <th className="py-3 text-black">Status</th>
+                <th className="py-3 px-4 whitespace-nowrap text-black">Course Title</th>
+                <th className="py-3 px-4 whitespace-nowrap text-black">Date</th>
+                <th className="py-3 px-4 whitespace-nowrap text-black">Duration</th>
+                <th className="py-3 px-4 whitespace-nowrap text-black">Score</th>
+                <th className="py-3 px-4 whitespace-nowrap text-black">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -120,11 +104,11 @@ const Overview = () => {
                   key={index}
                   className="border-b border-gray-100 hover:bg-gray-50"
                 >
-                  <td className="py-3">{activity.title}</td>
-                  <td className="py-3">{activity.date}</td>
-                  <td className="py-3">{activity.duration}</td>
-                  <td className="py-3">{activity.score}</td>
-                  <td className="py-3">
+                  <td className="py-3 px-4 whitespace-nowrap">{activity.title}</td>
+                  <td className="py-3 px-4 whitespace-nowrap">{activity.date}</td>
+                  <td className="py-3 px-4 whitespace-nowrap">{activity.duration}</td>
+                  <td className="py-3 px-4 whitespace-nowrap">{activity.score}</td>
+                  <td className="py-3 px-4 whitespace-nowrap">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-medium ${
                         activity.status === "Completed"
@@ -138,31 +122,19 @@ const Overview = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
 
       <div className="flex flex-col gap-10">
-              {/* Calendar */}
-          <div className="bg-white shadow-sm rounded-lg p-4 border flex justify-center">
-          <DayPicker
-      className="rounded-lg text-black"
-      components={{
-        IconLeft: ({ ...props }) => (
-          <ChevronLeft {...props} className="h-5 w-5 text-gray-700 cursor-pointer" />
-        ),
-        IconRight: ({ ...props }) => (
-          <ChevronRight {...props} className="h-5 w-5 text-gray-700 cursor-pointer" />
-        ),
-      }}
-      modifiersClassNames={{
-        today: 'bg-blue-600 text-white rounded-full',
-      }}
-    />
-          </div>
+        {/* Calendar */}
+              <div data-aos="fade-left">
+                 <Calendar />
+              </div>
+       
 
         {/* Admin Notification */}
-        <div className="bg-white shadow-sm rounded-lg p-4 border">
+        <div className="bg-white shadow-sm rounded-lg p-4 border" data-aos="fade-up">
           <h3 className="text-xl text-black font-semibold mb-4">
             Notifications
           </h3>

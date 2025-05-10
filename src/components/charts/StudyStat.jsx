@@ -11,11 +11,27 @@ import {
   ResponsiveContainer 
 } from 'recharts';
 
-
 const StudyStat = () => {
   const [timeFrame, setTimeFrame] = useState('Yearly');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check for mobile viewport on mount and window resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener("resize", checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -41,6 +57,29 @@ const StudyStat = () => {
     }
   };
 
+  // Get data for current timeframe
+  const chartData = getChartData();
+  
+  // Dynamically determine ticks based on data and screen size
+  const getYAxisTicks = () => {
+    // Find the maximum value in the data
+    const maxStudy = Math.max(...chartData.map(item => item.study || 0));
+    const maxTest = Math.max(...chartData.map(item => item.test || 0));
+    const maxValue = Math.max(maxStudy, maxTest);
+    
+    // Calculate appropriate tick spacing based on max value and screen size
+    const tickCount = isMobile ? 5 : 10;
+    const tickSpacing = Math.ceil(maxValue / tickCount);
+    
+    // Generate ticks
+    const ticks = [];
+    for (let i = 0; i <= tickCount; i++) {
+      ticks.push(i * tickSpacing);
+    }
+    
+    return ticks;
+  };
+
   // Get proper label for Y-axis based on timeFrame
   const getYAxisLabel = () => {
     return timeFrame === 'Today' ? 'Hours' : 'Hours';
@@ -53,12 +92,12 @@ const StudyStat = () => {
           Performance Statistics
         </h3>
         
-        <div className="flex items-center justify-end mb-4">
-          <div className="flex items-center mr-6">
+        <div className="flex items-center justify-between mb-4 gap-3 sm:gap-0">
+          <div className="flex items-center mr-0 sm:mr-6 mb-2 sm:mb-0">
             <div className="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
-            <span className='text-black'>Study</span>
+            <span className='text-black text-sm'>Study</span>
             <div className="w-3 h-3 rounded-full bg-teal-400 mx-2 ml-4"></div>
-            <span className='text-black'>Test</span>
+            <span className='text-black text-sm'>Test</span>
           </div>
           
           <div className="relative" ref={dropdownRef}>
@@ -78,7 +117,7 @@ const StudyStat = () => {
                   {['Yearly', 'Monthly', 'Weekly', 'Today'].map((option) => (
                     <li 
                       key={option} 
-                      className={`px-4 py-2 text-gray-500 cursor-pointer hover:bg-gray-100 ${timeFrame === option ? 'bg-blue-50 text-blue-600' : ''}`}
+                      className={`px-4 py-2 text-sm text-gray-500 cursor-pointer hover:bg-gray-100 ${timeFrame === option ? 'bg-blue-50 text-blue-600' : ''}`}
                       onClick={() => {
                         setTimeFrame(option);
                         setDropdownOpen(false);
@@ -94,12 +133,17 @@ const StudyStat = () => {
         </div>
       </div>
       
-      {/* Add a fixed height to this container */}
-      <div className="w-full h-72">
+      {/* Responsive chart container */}
+      <div className="w-full h-56 md:h-72">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={getChartData()}
-            margin={{ top: 10, right: 0, left: -10, bottom: 0 }}
+            data={chartData}
+            margin={{ 
+              top: 10, 
+              right: isMobile ? 5 : 15, 
+              left: isMobile ? -25 : 5, 
+              bottom: 0 
+            }}
           >
             <defs>
               <linearGradient id="colorStudy" x1="0" y1="0" x2="0" y2="1">
@@ -115,19 +159,30 @@ const StudyStat = () => {
             <XAxis 
               dataKey="period" 
               axisLine={false} 
-              tickLine={false} 
+              tickLine={false}
+              tick={{ fontSize: isMobile ? 10 : 12 }}
+              interval={isMobile ? 'preserveStartEnd' : 0}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
-              tickFormatter={(value) => `${value}Hr`}
+              tickFormatter={(value) => isMobile ? `${value}` : `${value}Hr`}
               domain={[0, 'auto']}
-              ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]} // Increments of 10
-              label={{ value: getYAxisLabel(), angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' }, offset: -5 }}
+              ticks={getYAxisTicks()}
+              tick={{ fontSize: isMobile ? 10 : 12 }}
+              width={isMobile ? 25 : 35}
+              label={isMobile ? null : { 
+                value: getYAxisLabel(), 
+                angle: -90, 
+                position: 'insideLeft', 
+                style: { textAnchor: 'middle' }, 
+                offset: -15 
+              }}
             />
             <Tooltip 
               formatter={(value) => [`${value} hours`, undefined]}
               labelFormatter={(label) => `${label}`}
+              contentStyle={{ fontSize: isMobile ? '12px' : '14px' }}
             />
             <Area 
               type="monotone" 
