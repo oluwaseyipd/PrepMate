@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 const Calendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2025, 4)); // May 2025
-  const [selectedDate, setSelectedDate] = useState(new Date(2025, 4, 10)); // May 10, 2025
+ const today = new Date();
+const [currentMonth, setCurrentMonth] = useState(new Date(today.getFullYear(), today.getMonth()));
+const [selectedDate, setSelectedDate] = useState(today);
+
   
   const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   const monthNames = [
