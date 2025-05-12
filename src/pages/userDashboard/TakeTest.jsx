@@ -1,26 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PlusCircle, BookIcon, Clock, Star } from "lucide-react";
 import emptyImage from "../../assets/images/empty.png";
 import { useModal } from "../../context/ModalContext";
 import { categoryStyles } from '../../constants/courses';
-
+import { courses } from "../../constants/courses";
 
 const COURSES_PER_PAGE = 12;
 
-
 const TakeTest = () => {
   const { setShowStartTestPrompt } = useModal();
-
-  const [submittedCourses, setSubmittedCourses] = useState([]); 
-
+  const navigate = useNavigate();
+  
+  const [submittedCourses, setSubmittedCourses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Load submitted courses from localStorage
   useEffect(() => {
-    const storedSubmittedTests = JSON.parse(localStorage.getItem('submittedTests')) || [];
-    setSubmittedCourses(storedSubmittedTests);
+    const fetchSubmittedCourses = () => {
+      try {
+        // Get test data
+        const storedSubmittedTests = JSON.parse(localStorage.getItem('submittedTests')) || [];
+        
+        // If we have valid course data, use it
+        if (Array.isArray(storedSubmittedTests) && storedSubmittedTests.length > 0) {
+          console.log("Loaded submitted courses:", storedSubmittedTests.length);
+          setSubmittedCourses(storedSubmittedTests);
+        } else {
+          console.log("No submitted courses found in localStorage");
+        }
+      } catch (error) {
+        console.error("Error loading submitted courses:", error);
+      }
+    };
+
+    fetchSubmittedCourses();
+    
+    // Add event listener to refresh the list when storage changes
+    window.addEventListener('storage', fetchSubmittedCourses);
+    
+    return () => {
+      window.removeEventListener('storage', fetchSubmittedCourses);
+    };
   }, []);
-  
 
   const toTitleCase = (str) =>
     str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -34,13 +56,40 @@ const TakeTest = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  
+  // Handle start test directly from this page
+  const handleStartTest = (courseId) => {
+    // First, find the course
+    const course = courses.find(c => c.id === courseId);
+    
+    if (!course) {
+      console.error("Course not found with id:", courseId);
+      return;
+    }
+    
+    // Configure the start test modal with the course ID and a direct navigation function
+    setShowStartTestPrompt({
+      show: true, 
+      courseId: courseId,
+      onConfirm: () => {
+        navigate('/dashboard/testinterface', { 
+          state: { 
+            courseId: courseId,
+            courseTitle: course.title,
+            courseCategory: course.category,
+            courseDuration: course.duration
+          } 
+        });
+      }
+    });
+  };
 
   const renderCourses = () => {
     if (submittedCourses.length === 0) {
       return (
         <div className="flex flex-col mt-24 md:mt-36 items-center justify-center h-96">
           <img src={emptyImage} alt="No Courses" className="w-60 md:w-90 mb-4" />
-          <p className="text-gray-500">No courses available. Please enroll in one first.</p>
+          <p className="text-gray-500">No completed tests available. Complete a test first!</p>
         </div>
       );
     } else {
@@ -70,41 +119,38 @@ const TakeTest = () => {
                 </div>
                 <hr className="mt-3 border border-blue-100" />
                 <div className="flex justify-between items-center my-3">
-                   <div className="flex justify-start items-center gap-3 mt-3">
-                  <span className="text-sm text-gray-600 flex items-center gap-1">
-                    <BookIcon className="text-blue-500" size={15} /> {course.totalQuestion}
-                  </span>
-                  <span className="text-sm text-gray-600 flex items-center gap-1">
-                    <Clock className="text-blue-500" size={15} /> {course.duration}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
+                  <div className="flex justify-start items-center gap-3">
+                    <span className="text-sm text-gray-600 flex items-center gap-1">
+                      <BookIcon className="text-blue-500" size={15} /> {course.totalQuestion}
+                    </span>
+                    <span className="text-sm text-gray-600 flex items-center gap-1">
+                      <Clock className="text-blue-500" size={15} /> {course.duration}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
                     <Star className="text-yellow-500" size={15} />
                     <span className="text-sm text-black">{course.rating}</span>
                     <span className="text-sm text-black">({course.ratingCount})</span>
                   </div>
                 </div>
-               
-                  
-                  <div className="flex justify-between items-center mb-2">
-  <Link
-    to={`../mycoursedetails/${course.id}`}
-    onClick={() => setShowStartTestPrompt(true)}
-    className="border px-4 py-2 border-blue-600 text-blue-600 rounded-full cursor-pointer hover:bg-blue-600 hover:text-white transition duration-300"
-  >
-    View Details
-  </Link>
-  <button
-    onClick={() => setShowStartTestPrompt(true)}
-    className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full transition duration-300"
-  >
-    Start Test
-  </button>
-</div>
+                
+                <div className="flex justify-between items-center mb-2">
+                  <Link
+                    to={`../mycoursedetails/${course.id}`}
+                    className="border px-4 py-2 border-blue-600 text-blue-600 rounded-full cursor-pointer hover:bg-blue-600 hover:text-white transition duration-300"
+                  >
+                    View Details
+                  </Link>
+                  <button
+                    onClick={() => handleStartTest(course.id)}
+                    className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-full transition duration-300"
+                  >
+                    Retake Test
+                  </button>
                 </div>
+              </div>
             ))}
           </div>
-
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
@@ -129,11 +175,10 @@ const TakeTest = () => {
     }
   };
 
-
-return (
-  <div className="p-6">
-          <div className="flex flex-row justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-black">Tests</h1>
+  return (
+    <div className="p-6">
+  <div className="flex flex-row justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-black">My Completed Tests</h1>
         <Link
           to="/dashboard/mycourses"
           className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -143,9 +188,9 @@ return (
         </Link>
       </div>
 
-    {renderCourses()}
-  </div>
-);
+      {renderCourses()}
+    </div>
+  );
 };
 
 export default TakeTest;

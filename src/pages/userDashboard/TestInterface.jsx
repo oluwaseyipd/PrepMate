@@ -16,7 +16,7 @@ const TestInterface = () => {
   const courseCategory = location.state?.courseCategory;
   const courseDuration = location.state?.courseDuration;
   
-  // Fallback to finding course if not passed via state
+  // Find the course using the courseId for complete details
   const course = courses.find((c) => c.id === courseId);
   
   // Use passed values first, then fallback to found course
@@ -83,7 +83,10 @@ const TestInterface = () => {
     const score = Math.round((numCorrect / totalQuestions) * 100);
     const timeTaken = formatTime(testDurationSeconds - timeLeft);
 
+    // Create a full result object with all necessary details
     const result = {
+      id: courseId, // Add id for direct course reference
+      testId: courseId,
       testTitle: testTitle,
       date: new Date().toLocaleDateString(),
       duration: timeTaken,
@@ -96,11 +99,23 @@ const TestInterface = () => {
       wrongAnswers,
       timeTaken,
       submitted: true,
-      testId: courseId || 'default'
+      // Include complete course details needed for TakeTest
+      course: course ? {
+        id: course.id,
+        title: course.title,
+        author: course.author,
+        authorImage: course.authorImage,
+        category: course.category,
+        duration: course.duration,
+        image: course.image,
+        totalQuestion: course.totalQuestion,
+        rating: course.rating,
+        ratingCount: course.ratingCount
+      } : null
     };
 
     updateTestResult(result);
-    console.log("Submitted Result:", result);
+    console.log("Prepared Result:", result);
     return result;
   };
 

@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Download,
   Copy,
+  Tags,
 } from "lucide-react";
 import { resourceContents } from "../../constants/resources";
 
@@ -18,6 +19,8 @@ const Resources = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredItemId, setHoveredItemId] = useState(null);
+  const [showCategories, setShowCategories] = useState(false);
+
 
   const useWindowWidth = () => {
     const [width, setWidth] = useState(window.innerWidth);
@@ -134,11 +137,65 @@ const Resources = () => {
             </div>
           </div>
 
-          <div className="sm:hidden">
-            <button className="p-2 bg-blue-100 rounded-full text-blue-600 border border-gray-300">
-              <Folder size={20} className="text-black" />
-            </button>
-          </div>
+         <div className="relative sm:hidden">
+  <button
+    onClick={() => setShowCategories(prev => !prev)}
+    className="p-2 bg-blue-100 rounded-full text-blue-600 border cursor-pointer border-gray-300"
+  >
+    <Tags size={20} className="text-black" />
+  </button>
+
+  {showCategories && (
+    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow z-10">
+      <button
+        onClick={() => {
+          setSelectedCategory("");
+          setShowCategories(false);
+        }}
+        className="block w-full px-4 py-2 text-left text-black hover:bg-blue-100"
+      >
+        All Categories
+      </button>
+      <button
+        onClick={() => {
+          setSelectedCategory("folder");
+          setShowCategories(false);
+        }}
+        className="block w-full px-4 py-2 text-left text-black hover:bg-blue-100"
+      >
+        Folder
+      </button>
+      <button
+        onClick={() => {
+          setSelectedCategory("pdf");
+          setShowCategories(false);
+        }}
+        className="block w-full px-4 py-2 text-left text-black hover:bg-blue-100"
+      >
+        PDF
+      </button>
+      <button
+        onClick={() => {
+          setSelectedCategory("xls");
+          setShowCategories(false);
+        }}
+        className="block w-full px-4 py-2 text-left text-black hover:bg-blue-100"
+      >
+        XLS
+      </button>
+      <button
+        onClick={() => {
+          setSelectedCategory("doc");
+          setShowCategories(false);
+        }}
+        className="block w-full px-4 py-2 text-left text-black hover:bg-blue-100"
+      >
+        DOC
+      </button>
+    </div>
+  )}
+</div>
+
         </div>
       </div>
 

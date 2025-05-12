@@ -25,11 +25,57 @@ const UserLayout = () => {
   const finishTest = (completedCourse) => {
     try {
       const storedCourses = JSON.parse(localStorage.getItem('taketest')) || [];
-      const updatedCourses = [...storedCourses, completedCourse];
-      localStorage.setItem('taketest', JSON.stringify(updatedCourses));
+      
+      // Check if the course already exists in the array
+      const existingIndex = storedCourses.findIndex(course => course.testId === completedCourse.testId);
+      
+      // If it exists, update it; otherwise, add it
+      if (existingIndex >= 0) {
+        storedCourses[existingIndex] = completedCourse;
+      } else {
+        storedCourses.push(completedCourse);
+      }
+      
+      localStorage.setItem('taketest', JSON.stringify(storedCourses));
       console.log("Test saved to localStorage successfully");
+      
+      // Add the completed course to submittedTests for display in TakeTest.js
+      addCompletedCourseToTakeTest(completedCourse);
     } catch (error) {
       console.error("Error saving test to localStorage:", error);
+    }
+  };
+  
+  // Function to add course to submittedTests in localStorage for TakeTest.js
+  const addCompletedCourseToTakeTest = (testResult) => {
+    try {
+      // Get the course details from myCourses
+      const myCourses = JSON.parse(localStorage.getItem('myCourses')) || [];
+      const courseDetails = myCourses.find(course => course.id === testResult.testId);
+      
+      if (!courseDetails) {
+        console.error("Course details not found for testId:", testResult.testId);
+        return;
+      }
+      
+      // Get existing submitted tests
+      const submittedTests = JSON.parse(localStorage.getItem('submittedTests')) || [];
+      
+      // Check if this test is already in the submitted list
+      const existingIndex = submittedTests.findIndex(course => course.id === courseDetails.id);
+      
+      // If it exists, update it; otherwise, add it
+      if (existingIndex >= 0) {
+        submittedTests[existingIndex] = courseDetails;
+      } else {
+        submittedTests.push(courseDetails);
+      }
+      
+      // Save back to localStorage
+      localStorage.setItem('submittedTests', JSON.stringify(submittedTests));
+      console.log("Course added to submittedTests successfully");
+    } catch (error) {
+      console.error("Error adding course to submittedTests:", error);
     }
   };
 

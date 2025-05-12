@@ -92,9 +92,9 @@ const AccountSettings = () => {
       </div>
       <div className="bg-white shadow rounded-b-lg p-6">
         <div className="mt-15 md:mt-1 md:pl-40">
-          <h2 className="text-2xl text-black font-semibold">Mohid Khan</h2>
+          <h2 className="text-2xl text-black font-semibold">Abiola John</h2>
           <p className="text-gray-500 text-sm">
-            UX Designer | San Francisco | Joined August 2024
+            Frontend Developer | Nigeria | Joined February 2025
           </p>
         </div>
 
