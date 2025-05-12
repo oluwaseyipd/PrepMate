@@ -83,7 +83,7 @@ const Overview = () => {
 
 
         {/* Recent Activities */}
-        <div className="bg-white shadow-sm rounded-lg p-4 border mt-10" data-aos="fade-left" data-aos-delay="1200">
+        <div className="bg-white shadow-sm rounded-lg p-4 border mt-10" >
           <h3 className="text-lg text-black font-semibold pb-4 border-b border-gray-300">
             Recent Activities
           </h3>

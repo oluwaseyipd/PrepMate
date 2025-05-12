@@ -201,7 +201,10 @@ const Resources = () => {
                 </div>
 
                 <p className="text-black text-lg">{item.title}</p>
-                <span className="text-gray-500">{item.files} Files</span>
+
+                {item.type === 'folder' && (
+  <span className="text-gray-500">{item.files} Files</span>
+)}
               </div>
             ))}
           </div>
