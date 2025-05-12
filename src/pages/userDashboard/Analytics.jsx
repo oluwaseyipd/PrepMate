@@ -51,7 +51,7 @@ const Analytics = () => {
               <div className="flex justify-between items-center bg-orange-500 text-white p-3 rounded-full">
                 <Calendar className="text-white" size={30} />
               </div>
-              <span className="text-black text-xl">Time Spent</span>
+              <span className="text-black text-xl">Completed Cources</span>
             </div>
 
             <div className="flex flex-col gap-2 mt-5">

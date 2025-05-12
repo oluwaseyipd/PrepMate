@@ -7,7 +7,7 @@ import Calendar from "../../components/Calendar";
 import StudyStat from "../../components/charts/StudyStat";
 import welcomeAvatar from "../../assets/images/signin.png";
 import "react-day-picker/dist/style.css";
-import { FaClock } from "react-icons/fa";
+import { Hourglass, Book, Award, BarChart } from "lucide-react";
 
 const Overview = () => {
 
@@ -57,22 +57,62 @@ const Overview = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mt-10">
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="200"> 
-            <FaClock className="text-pink-500 text-xl bg-pink-300 p-3 h-12 w-12 rounded-full" />
-            <h2 className="mt-3 text-xl text-black">Total Tests Taken</h2>
-          </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="400"> 
-            <FaClock className="text-blue-500 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
-            <h2 className="mt-3 text-xl text-black">Average Score</h2>
-          </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="600"> 
-            <FaClock className="text-green-500 text-xl bg-green-300 p-3 h-12 w-12 rounded-full" />
-            <h2 className="mt-3 text-xl text-black">Best Performance</h2>
-          </div>
-          <div className="p-5 flex flex-col bg-white justify-center items-center rounded-lg" data-aos="fade-up" data-aos-delay="800"> 
-            <FaClock className="text-yellow-500 text-xl bg-yellow-300 p-3 h-12 w-12 rounded-full" />
-            <h2 className="mt-3 text-xl text-black">Courses Enrolled</h2>
-          </div>
+     <div 
+  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  data-aos="fade-up" 
+  data-aos-delay="200"
+>
+  <div className="flex items-center justify-center h-14 w-14 bg-pink-100 rounded-full">
+    <Hourglass className="text-pink-600 text-2xl" />
+  </div>
+  <div className="flex flex-col">
+    <h2 className="text-3xl font-semibold text-gray-900">21</h2>
+    <p className="text-gray-500">Total Tests Taken</p>
+  </div>
+</div>
+
+        <div 
+  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  data-aos="fade-up" 
+  data-aos-delay="200"
+>
+  <div className="flex items-center justify-center h-14 w-14 bg-blue-100 rounded-full">
+    <BarChart className="text-blue-600 text-2xl" />
+  </div>
+  <div className="flex flex-col">
+    <h2 className="text-3xl font-semibold text-gray-900">345</h2>
+    <p className="text-gray-500">Average Score</p>
+  </div>
+</div>
+
+          <div 
+  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  data-aos="fade-up" 
+  data-aos-delay="200"
+>
+  <div className="flex items-center justify-center h-14 w-14 bg-green-100 rounded-full">
+    <Award className="text-green-600 text-2xl" />
+  </div>
+  <div className="flex flex-col">
+    <h2 className="text-3xl font-semibold text-gray-900">90</h2>
+    <p className="text-gray-500">Best Perfomance</p>
+  </div>
+</div>
+
+     <div 
+  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  data-aos="fade-up" 
+  data-aos-delay="200"
+>
+  <div className="flex items-center justify-center h-14 w-14 bg-yellow-100 rounded-full">
+    <Book className="text-yellow-600 text-2xl" />
+  </div>
+  <div className="flex flex-col">
+    <h2 className="text-3xl font-semibold text-gray-900">21</h2>
+    <p className="text-gray-500">Course Enrolled</p>
+  </div>
+</div>
+
         </div>
 
         {/* Statistics */}
