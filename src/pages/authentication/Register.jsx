@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaGoogle, FaTwitter, FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
+import { FaFacebook, FaGoogle, FaXTwitter, FaUser, FaLock, FaEnvelope } from 'react-icons/fa6';
 import logo from '../../assets/images/logo.png';
 import register from '../../assets/images/register.png';
 import { Link } from "react-router-dom";
@@ -88,7 +88,7 @@ const Register = () => {
                   <FaGoogle className="text-red-600 h-8 w-8" />
                   </button>
                   <button className="p-2 bg-blue-50 rounded-lg hover:bg-gray-200 cursor-pointer">
-                  <FaTwitter className="text-blue-500 h-8 w-8" />
+                  <FaXTwitter className="text-blue-500 h-8 w-8" />
                   </button>
                   <button className="p-2 bg-blue-100 rounded-lg hover:bg-gray-200 cursor-pointer">
                   <FaFacebook className="text-blue-700 h-8 w-8" />

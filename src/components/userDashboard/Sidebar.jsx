@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { LogOut, Settings, BookOpen, Bookmark } from 'lucide-react';
+import { FaGear, FaRightFromBracket, FaBookmark, FaBookOpen } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { navItems } from '../../constants/user';
 import logo from '../../assets/images/logo.png';
+
 
 const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
   const sidebarRef = useRef(null);
@@ -28,7 +29,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
   };
 
   return (
-    <aside ref={sidebarRef} className="bg-white flex flex-col text-black w-64 p-4 md:block min-h-screen border-r border-gray-200">
+    <aside ref={sidebarRef} className="bg-white flex flex-col text-gray-600 w-64 p-4 md:block min-h-screen border-r border-gray-200">
       <div className="mb-8">
         <img src={logo} alt="" className="w-50" />
       </div>
@@ -37,7 +38,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
           item.name === "Courses" ? (
             <div key={index} className="mb-2">
               <button 
-                className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded w-full text-left" 
+                className="flex items-center gap-3 p-3 hover:bg-blue-600 text-gray-600 hover:text-white rounded w-full text-left transition-all duration-300" 
                 onClick={() => setIsCoursesOpen(!isCoursesOpen)}
               >
                 <item.icon size={20} />
@@ -47,38 +48,39 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
                 <div className="ml-8">
                   <Link 
                     to="/dashboard/allCourses" 
-                    className="flex items-center gap-2 p-2 hover:bg-blue-100 rounded"
+                    className="flex items-center gap-2 p-2 rounded bg-white  hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300"
                     onClick={handleNavItemClick}
                   >
-                    <BookOpen size={16} />
+                    <FaBookOpen size={16} />
                     <span>All Courses</span>
                   </Link>
                   <Link 
                     to="/dashboard/mycourses" 
-                    className="flex items-center gap-2 p-2 hover:bg-blue-100 rounded"
+                    className="flex items-center gap-2 p-2 rounded bg-white  hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300"
                     onClick={handleNavItemClick}
                   >
-                    <Bookmark size={16} />
+                    <FaBookmark  size={16} />
                     <span>My Courses</span>
                   </Link>
                 </div>
               )}
             </div>
           ) : (
-            <Link key={index} to={item.path} className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded block" onClick={handleNavItemClick}>
+            <Link key={index} to={item.path} className="flex items-center mb-4 gap-5 p-3 bg-white  hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300 rounded block" onClick={handleNavItemClick}>
               <item.icon size={20} />
               <span className="block">{item.name}</span>
             </Link>
           )
         ))}
       </nav>
+
       <div className="mt-auto">
-        <Link to="/dashboard/settings" className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded block" onClick={handleNavItemClick}>
-          <Settings size={20} />
+        <Link to="/dashboard/settings" className="flex items-center gap-3 p-3 bg-white  hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300 rounded  block" onClick={handleNavItemClick}>
+          <FaGear size={20} />
           <span className="block">Settings</span>
         </Link>
-        <Link to="/signin" className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded w-full text-left" onClick={handleNavItemClick}>
-          <LogOut size={20} />
+        <Link to="/signin" className="flex items-center gap-3 p-3 bg-white  hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300 rounded  w-full text-left" onClick={handleNavItemClick}>
+          <FaRightFromBracket size={20} />
           <span className="block">Sign Out</span>
         </Link>
       </div>

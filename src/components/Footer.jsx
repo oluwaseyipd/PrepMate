@@ -2,9 +2,9 @@ import React from "react";
 import { navigation, communityLinks, socialLinks } from "../constants";
 import logo from "../assets/images/logo-w.png";
 import { Link, useLocation } from "react-router-dom";
+import { FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
-
   return (
     <footer className="bg-blue-600 text-white py-12 mt-6 md:mt-16">
       <div className="container mx-auto px-4 flex flex-col md:flex-row md:justify-between gap-8">
@@ -12,7 +12,8 @@ const Footer = () => {
         <div className="space-y-4">
           <img src={logo} alt="Campty Logo" className="w-56" />
           <p className="text-white text-xl w-[350px]">
-          An academic companion that offers practice tests, progress tracking, and insights to help students excel in school.
+            An academic companion that offers practice tests, progress tracking,
+            and insights to help students excel in school.
           </p>
         </div>
 
@@ -23,7 +24,10 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {navigation.map((link, i) => (
-                <li key={i} className="text-gray-300 hover:text-white transition cursor-pointer">
+                <li
+                  key={i}
+                  className="text-gray-300 hover:text-white transition cursor-pointer"
+                >
                   <Link to={link.href}>{link.label}</Link>
                 </li>
               ))}
@@ -35,7 +39,10 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Community</h3>
             <ul className="space-y-2">
               {communityLinks.map((link, i) => (
-                <li key={i} className="text-gray-300 hover:text-white transition cursor-pointer">
+                <li
+                  key={i}
+                  className="text-gray-300 hover:text-white transition cursor-pointer"
+                >
                   <Link to={link.href}>{link.text}</Link>
                 </li>
               ))}
@@ -51,18 +58,27 @@ const Footer = () => {
               </li>
             </ul>
             {/* Social Media */}
-            <div className="flex space-x-4 mt-4">
-  {socialLinks.map((link, i) => (
-    <a
-      key={i}
-      href={link.href}
-      className="bg-white h-12 w-12 p-2 rounded-full hover:opacity-80 transition"
-    >
-      <img src={link.icon} alt={link.alt} className="w-10" />
-    </a>
-  ))}
-</div>
 
+            <div className="flex space-x-4 mt-4">
+              <a
+                href=""
+                className="flex items-center bg-white hover:bg-blue-400 h-12 w-12 p-2 rounded-full hover:opacity-80 transition-all duration-300"
+              >
+                <FaXTwitter className="text-4xl text-blue-600 hover:text-white" />
+              </a>
+              <a
+                href=""
+                className="flex items-center bg-white hover:bg-blue-400 h-12 w-12 p-2 rounded-full hover:opacity-80 transition-all duration-300"
+              >
+                <FaInstagram className="text-4xl text-blue-600 hover:text-white" />
+              </a>
+              <a
+                href=""
+                className="flex items-center bg-white hover:bg-blue-400 h-12 w-12 p-2 rounded-full hover:opacity-80 transition-all duration-300"
+              >
+               <FaLinkedinIn className="text-3xl text-blue-600 hover:text-white" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

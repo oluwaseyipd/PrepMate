@@ -1,5 +1,6 @@
 import { title } from "framer-motion/client";
 import { LayoutDashboard, BookOpen, Bookmark, Clock, CheckCircle, FileText, BarChart, Hourglass } from "lucide-react";
+import { FaTable, FaChartLine, FaBookOpen, FaFolderOpen, FaHourglassHalf, FaGear  } from "react-icons/fa6";
 import user1 from "../assets/images/user1.jpeg";
 
 
@@ -7,11 +8,11 @@ import user1 from "../assets/images/user1.jpeg";
 
 // Sidebar Navigation
 export   const navItems = [
-  { name: 'Overview', icon: LayoutDashboard, path: '/dashboard/overview' },
-  { name: 'Analytics', icon: BarChart, path: '/dashboard/analytics' },
-  { name: 'Courses', icon: BookOpen, path: '/dashboard/courses' },
-  { name: 'Resources', icon: Bookmark, path: '/dashboard/resources' },
-  { name: 'Take a test', icon: Hourglass, path: '/dashboard/takeatest' },
+  { name: 'Overview', icon: FaTable, path: '/dashboard/overview' },
+  { name: 'Analytics', icon: FaChartLine, path: '/dashboard/analytics' },
+  { name: 'Courses', icon: FaBookOpen, path: '/dashboard/courses' },
+  { name: 'Resources', icon: FaFolderOpen, path: '/dashboard/resources' },
+  { name: 'Take a test', icon: FaHourglassHalf, path: '/dashboard/takeatest' },
 ];
 
 

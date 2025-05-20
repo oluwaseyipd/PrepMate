@@ -189,6 +189,7 @@ const TakeTest = () => {
       </div>
 
       {renderCourses()}
+
     </div>
   );
 };

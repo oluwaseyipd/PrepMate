@@ -6,6 +6,7 @@ import { useModal } from "../context/ModalContext";
 import { useTestResult } from "../context/TestResultContext";
 import { useTestHistory } from "../context/TestHistoryContext";
 import submitalert from "../assets/images/are-you-sure.png";
+import Chatbot from '../components/Chatbot';
 
 const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -134,8 +135,19 @@ const UserLayout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         <Header toggleSidebar={toggleSidebar} />
+
+                {/* Support Tab */}
+        
+      <Chatbot />
         <main className="relative flex-1 p-3 md:p-6 overflow-y-auto h-full">
           <Outlet /> {/* This is where all your pages will show automatically */}
+
+
+
+
+
+
+
 
           {/* Start test Message */}
           {showStartTestPrompt.show && (

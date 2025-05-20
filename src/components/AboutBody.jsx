@@ -3,12 +3,8 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { team } from "../constants/index.jsx";
-import {
-  FaCheckCircle,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import team1 from "../assets/images/teams/team-1.png";
 import mission1 from "../assets/images/mission-1.png";
 import mission2 from "../assets/images/mission-2.png";
@@ -180,14 +176,14 @@ const AboutBody = () => {
                     </p>
                     {/* Social Media Links */}
                     <div className="flex justify-start space-x-3 mt-3">
-                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-gray-200">
-                        <FaTwitter className="text-blue-400 text-3xl cursor-pointer" />
+                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-600 transition-all duration-300">
+                        <FaXTwitter className="text-blue-700 hover:text-white  text-3xl cursor-pointer" />
                       </div>
-                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-gray-200">
-                        <FaLinkedin className="text-blue-700 text-3xl cursor-pointer" />
+                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-600 transition-all duration-300">
+                        <FaLinkedinIn className="text-blue-700 hover:text-white  text-3xl cursor-pointer" />
                       </div>
-                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-gray-200">
-                        <FaInstagram className="text-pink-500 text-3xl cursor-pointer" />
+                      <div className="h-10 w-10 p-2 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-600 transition-all duration-300">
+                        <FaInstagram className="text-blue-700 hover:text-white text-3xl cursor-pointer" />
                       </div>
                     </div>
                   </div>

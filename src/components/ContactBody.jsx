@@ -2,17 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-  FaYoutube,
-  FaPhone,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaClock,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaXTwitter, FaEnvelope, FaPhoneFlip, FaYoutube, FaLocationDot, FaClock  } from "react-icons/fa6";
 import { faqs } from "../constants";
 import expand from "../assets/images/icons/expand.png";
 import collapse from "../assets/images/icons/collapse.png";
@@ -113,31 +103,31 @@ const ContactBody = () => {
               data-aos-delay="1200"
             >
               <div className="flex items-center gap-4 border border-gray-200 bg-white py-3 px-5 rounded-xl">
-                <FaMapMarkerAlt className="text-blue-400 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
+                <FaLocationDot className="text-blue-400 text-xl bg-blue-200 p-3 h-12 w-12 rounded-full" />
                 <div>
                   <h3 className="text-2xl text-black">Office</h3>
                   <p className="text-black">Jl. Merdeka Raya No.738</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 border border-gray-200 bg-white py-3 px-5 rounded-xl">
-                <FaPhone className="text-blue-400 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
+                <FaPhoneFlip className="text-yellow-400 text-xl bg-yellow-200 p-3 h-12 w-12 rounded-full" />
                 <div>
                   <h3 className="text-2xl text-black">Phone</h3>
                   <p className="text-black">(021) 111 444 90</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 border border-gray-200 bg-white py-3 px-5 rounded-xl">
-                <FaClock className="text-blue-400 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
+                <FaClock className="text-purple-400 text-xl bg-purple-200 p-3 h-12 w-12 rounded-full" />
                 <div>
                   <h3 className="text-2xl text-black">Working Hours</h3>
                   <p className="text-black">Everyday 09 am - 07 pm</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 border border-gray-200 bg-white py-3 px-5 rounded-xl">
-                <FaEnvelope className="text-blue-400 text-xl bg-blue-300 p-3 h-12 w-12 rounded-full" />
+                <FaEnvelope className="text-green-400 text-xl bg-green-200 p-3 h-12 w-12 rounded-full" />
                 <div>
                   <h3 className="text-2xl text-black">Email</h3>
-                  <p className="text-black">blucorp@support.com</p>
+                  <p className="text-black">prepmate@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -152,11 +142,10 @@ const ContactBody = () => {
                 Social Media :
               </h4>
               <div className="flex space-x-4">
-                <FaFacebook className="text-blue-600 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
-                <FaTwitter className="text-blue-400 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
-                <FaLinkedin className="text-blue-700 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
-                <FaInstagram className="text-pink-500 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
-                <FaYoutube className="text-red-500 text-2xl cursor-pointer border border-gray-300 p-2 rounded-full h-9 w-9 items-center" />
+                <FaXTwitter className="text-blue-700  hover:text-white bg-transparent hover:bg-blue-700  cursor-pointer border border-gray-300 p-2 rounded-full h-12 w-12 items-center transition-all duration-300" />
+                <FaLinkedinIn className="text-blue-700  hover:text-white bg-transparent hover:bg-blue-700 cursor-pointer border border-gray-300 p-2 rounded-full h-12 w-12 items-center transition-all duration-300" />
+                <FaInstagram className="text-blue-700  hover:text-white bg-transparent hover:bg-blue-700 cursor-pointer border border-gray-300 p-2 rounded-full h-12 w-12 items-center transition-all duration-300" />
+                <FaYoutube className="text-blue-700  hover:text-white bg-transparent hover:bg-blue-700 cursor-pointer border border-gray-300 p-2 rounded-full h-12 w-12 items-center transition-all duration-300" />
               </div>
             </div>
           </div>
