@@ -1,11 +1,26 @@
 import React from "react";
-import { ArrowDown, Calendar } from "lucide-react";
+import { ArrowDown, Calendar} from "lucide-react";
+import { Link } from "react-router-dom";
 import RevenueStat from "../../components/charts/RevenueStat";
 import StudyStat from "../../components/charts/StudyStat";
+import { FaHouse } from "react-icons/fa6";
+
 
 const Analytics = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
+    <div className="p-6">
+      {/* Heading */}
+      <div className="flex items-center gap-3 text-gray-700 mb-5">
+        <h1 className="text-2xl font-bold text-black">Analytics</h1>
+        |
+        <Link to="/dashboard/overview"
+        className="flex items-center gap-2 text-gray-500 text-sm ml-2">
+          <FaHouse className="text-gray-500" size={15} />
+          Overview 
+        </Link>
+
+      </div>
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
       {/* Main side */}
       <div className="lg:col-span-3">
         {/* Quick Stat */}
@@ -110,6 +125,7 @@ const Analytics = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { courses, categoryStyles } from '../../constants/courses';
 import { MarsStroke, Share2, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FaHouse } from "react-icons/fa6";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -49,7 +50,17 @@ const CourseDetails = () => {
         </div>
       )}
 
-      <h1 className="text-3xl text-black font-bold mb-4">Course Details</h1>
+            {/* Heading */}
+            <div className="flex items-center gap-3 text-gray-700 mb-5">
+              <h1 className="text-2xl font-bold text-black">Course Details</h1>
+              |
+              <Link to="/dashboard/overview"
+              className="flex items-center gap-2 text-gray-500 text-sm ml-2">
+                <FaHouse className="text-gray-500" size={15} />
+                Overview 
+              </Link>
+      
+            </div>
 
       <div className="flex flex-col md:flex-row gap-4">
         {/* Main Content */}

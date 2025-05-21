@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import emptyImage from '../../assets/images/empty.png';
 import { PlusCircle, BookIcon, Clock, Star } from 'lucide-react';
 import { categoryStyles } from '../../constants/courses';
+import { FaHouse } from "react-icons/fa6";
 
 const COURSES_PER_PAGE = 12;
 
@@ -123,8 +124,18 @@ const MyCourses = () => {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-black">My Courses</h1>
+      <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
+                     {/* Heading */}
+             <div className="flex items-center gap-3 text-gray-700 mb-5">
+               <h1 className="text-2xl font-bold text-black">My Courses</h1>
+               |
+               <Link to="/dashboard/overview"
+               className="flex items-center gap-2 text-gray-500 text-sm ml-2">
+                 <FaHouse className="text-gray-500" size={15} />
+                 Overview 
+               </Link>
+       
+             </div>
         <Link
           to="/dashboard/allcourses"
           className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"

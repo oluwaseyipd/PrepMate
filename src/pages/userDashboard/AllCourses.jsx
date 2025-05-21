@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle, ArrowLeft, ArrowRight, Bookmark, BookIcon, Clock, Star } from 'lucide-react';
 import { courses, categoryStyles } from '../../constants/courses';
+import { FaHouse } from "react-icons/fa6";
 
 const AllCourses = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +25,17 @@ const AllCourses = () => {
   
   return (
     <div className="p-4">
-      <h1 className="text-3xl text-black font-bold mb-4">All Courses</h1>
+                         {/* Heading */}
+                 <div className="flex items-center gap-3 text-gray-700 mb-5">
+                   <h1 className="text-2xl font-bold text-black">All Courses</h1>
+                   |
+                   <Link to="/dashboard/overview"
+                   className="flex items-center gap-2 text-gray-500 text-sm ml-2">
+                     <FaHouse className="text-gray-500" size={15} />
+                     Overview 
+                   </Link>
+           
+                 </div>
       <div className="md:grid md:grid-cols-2 lg:grid-cols-4 my-2 gap-4">
       {currentCourses.map((course) => (
 

@@ -12,6 +12,8 @@ import {
   Tags,
 } from "lucide-react";
 import { resourceContents } from "../../constants/resources";
+import { Link } from "react-router-dom";
+import { FaHouse } from "react-icons/fa6";
 
 const Resources = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -107,7 +109,17 @@ const Resources = () => {
 
       {/* Top Section */}
       <div className="flex flex-col md:flex-row justify-between md:items-center mb-6">
-        <h1 className="text-3xl font-bold text-black">Resources</h1>
+              {/* Heading */}
+      <div className="flex items-center gap-3 text-gray-700 mb-5">
+        <h1 className="text-2xl font-bold text-black">Resources</h1>
+        |
+        <Link to="/dashboard/overview"
+        className="flex items-center gap-2 text-gray-500 text-sm ml-2">
+          <FaHouse className="text-gray-500" size={15} />
+          Overview 
+        </Link>
+
+      </div>
         <div className="flex items-center justify-between gap-4 mt-5 md:mt-0">
           <div className="flex items-center relative w-full sm:w-auto bg-blue-50 border border-gray-300 rounded-full p-1">
             <Search size={18} className="mr-2 text-gray-500" />

@@ -40,7 +40,7 @@ const Overview = () => {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
       <div className="lg:col-span-2">
         <div className="flex bg-blue-500 text-white px-5 pt-2 rounded-lg items-center justify-between">
-          <div>
+          <div className="p-5">
             <h1 className="text-2xl md:text-4xl">
               Welcome back, John 👋{" "}
             </h1>
@@ -57,58 +57,58 @@ const Overview = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-10">
      <div 
-  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  className="flex flex-col md:flex-row  items-center justify-center md:justify-between gap-4 py-4  px-2 md:px-4 bg-white rounded-xl shadow-sm"
   data-aos="fade-up" 
   data-aos-delay="200"
 >
-  <div className="flex items-center justify-center h-14 w-14 bg-pink-100 rounded-full">
+  <div className="flex  items-center justify-center h-14 w-14 bg-pink-100 rounded-full">
     <Hourglass className="text-pink-600 text-2xl" />
   </div>
-  <div className="flex flex-col">
+  <div className="flex flex-col text-center md:text-left">
     <h2 className="text-3xl font-semibold text-gray-900">21</h2>
     <p className="text-gray-500">Total Tests Taken</p>
   </div>
 </div>
 
         <div 
-  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  className="flex flex-col md:flex-row  items-center justify-center md:justify-between gap-4 py-4  px-2 md:px-4 bg-white rounded-xl shadow-sm"
   data-aos="fade-up" 
   data-aos-delay="200"
 >
   <div className="flex items-center justify-center h-14 w-14 bg-blue-100 rounded-full">
     <BarChart className="text-blue-600 text-2xl" />
   </div>
-  <div className="flex flex-col">
+  <div className="flex flex-col text-center md:text-left">
     <h2 className="text-3xl font-semibold text-gray-900">345</h2>
     <p className="text-gray-500">Average Score</p>
   </div>
 </div>
 
           <div 
-  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  className="flex flex-col md:flex-row  items-center justify-center md:justify-between gap-4 py-4  px-2 md:px-4 bg-white rounded-xl shadow-sm"
   data-aos="fade-up" 
   data-aos-delay="200"
 >
   <div className="flex items-center justify-center h-14 w-14 bg-green-100 rounded-full">
     <Award className="text-green-600 text-2xl" />
   </div>
-  <div className="flex flex-col">
+  <div className="flex flex-col text-center md:text-left">
     <h2 className="text-3xl font-semibold text-gray-900">90</h2>
     <p className="text-gray-500">Best Perfomance</p>
   </div>
 </div>
 
      <div 
-  className="flex items-center justify-between gap-4 p-4 bg-white rounded-xl shadow-sm"
+  className="flex flex-col md:flex-row  items-center justify-center md:justify-between gap-4 py-4  px-2 md:px-4 bg-white rounded-xl shadow-sm"
   data-aos="fade-up" 
   data-aos-delay="200"
 >
   <div className="flex items-center justify-center h-14 w-14 bg-yellow-100 rounded-full">
     <Book className="text-yellow-600 text-2xl" />
   </div>
-  <div className="flex flex-col">
+  <div className="flex flex-col text-center md:text-left">
     <h2 className="text-3xl font-semibold text-gray-900">21</h2>
     <p className="text-gray-500">Course Enrolled</p>
   </div>
