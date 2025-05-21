@@ -133,7 +133,7 @@ const Header = ({ toggleSidebar }) => {
                 </Link>
                 
                 <Link 
-                  to="/dashboard/reset-password" 
+                   to="/dashboard/settings"
                   className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
                   onClick={() => setShowProfileDropdown(false)}
                 >
