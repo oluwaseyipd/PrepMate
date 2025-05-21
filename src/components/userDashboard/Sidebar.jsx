@@ -81,17 +81,6 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
           )
         ))}
       </nav>
-
-      <div className="mt-auto border-t border-gray-200 pt-4">
-        <Link to="/dashboard/settings" className="flex items-center gap-3 p-3 bg-white hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300 rounded block mb-2" onClick={handleNavItemClick}>
-          <FaGear size={20} />
-          <span className="block">Settings</span>
-        </Link>
-        <Link to="/signin" className="flex items-center gap-3 p-3 bg-white hover:bg-blue-600 text-gray-600 hover:text-white transition-all duration-300 rounded w-full text-left" onClick={handleNavItemClick}>
-          <FaRightFromBracket size={20} />
-          <span className="block">Sign Out</span>
-        </Link>
-      </div>
     </aside>
   );
 };

@@ -63,7 +63,7 @@ const Header = ({ toggleSidebar }) => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between sticky top-0">
+    <header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-50">
       {/* Hamburger Icon for Mobile */}
       <button className="md:hidden" onClick={toggleSidebar}>
         <Menu size={24} className="text-gray-700" />
@@ -107,7 +107,7 @@ const Header = ({ toggleSidebar }) => {
           
           {/* Profile Dropdown */}
           {showProfileDropdown && (
-            <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-200 animate-fade-in-down">
+            <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-[1000] border border-gray-200 animate-fade-in-down">
               {/* User Info Section */}
               <div className="px-4 py-3 border-b border-gray-100">
                 <div className="flex items-center">

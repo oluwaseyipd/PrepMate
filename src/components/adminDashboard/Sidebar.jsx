@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { LogOut, Settings, BookOpen, Bookmark } from 'lucide-react';
+import { FaGear, FaRightFromBracket, FaBookmark, FaBookOpen, FaChevronDown } from "react-icons/fa6";
+
 import { Link } from 'react-router-dom';
 import { navItems } from '../../constants/admin';
 import logo from '../../assets/images/logo.png';
@@ -50,7 +52,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
                     className="flex items-center gap-2 p-2 hover:bg-blue-100 rounded"
                     onClick={handleNavItemClick}
                   >
-                    <BookOpen size={16} />
+                    <FaBookOpen size={16} />
                     <span>All Courses</span>
                   </Link>
                   <Link 
@@ -58,7 +60,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
                     className="flex items-center gap-2 p-2 hover:bg-blue-100 rounded"
                     onClick={handleNavItemClick}
                   >
-                    <Bookmark size={16} />
+                    <FaBookmark size={16} />
                     <span>My Courses</span>
                   </Link>
                 </div>
