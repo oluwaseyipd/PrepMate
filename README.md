@@ -1,75 +1,118 @@
 # PrepMate
 
-**PrepMate** is a web-based platform designed to help students prepare for exams through computer-based tests (CBT). It allows users to practice with multiple-choice questions, track progress, and access detailed explanations for answers. The platform supports test hosting, user accounts, dashboards, and performance analytics.
+A web-based platform designed to help students prepare for exams through computer-based tests (CBT). PrepMate allows users to practice with multiple-choice questions, track progress, and access detailed explanations for answers.
 
 ## Live Demo
-[PrepMate](https://oluwaseyipd.github.io/PrepMate/)
+[PrepMate](https://prepmates.vercel.app)
 
-
-## Table of Contents
-- [Description](#description)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation Instructions](#installation-instructions)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Description
-**PrepMate** is built to help students enhance their exam preparation through customizable tests. The platform includes features such as:
-- User accounts and personalized dashboards
-- Test creation and management
-- Performance analytics
-- Leaderboards
-- Detailed answer explanations
-- Downloadable test results and resources
 
 ## Features
-- **User Dashboard**: Personalized dashboard to track test progress and performance.
-- **Multiple Choice Tests**: Create and host CBTs with multiple-choice questions.
-- **Admin Panel**: Allows teachers to create and manage tests, track student progress, and review results.
-- **Leaderboards**: See top scorers in various tests.
-- **Performance Analytics**: Detailed insights into student performance.
-- **Resources**: Download reading materials and test result sheets.
 
-## Technologies Used
-- **Frontend**: HTML, ReactJS, Tailwind CSS
-- **Icons**: lucide-react icons
-- **Deployment**: GitHub Pages
+- **Computer-Based Testing (CBT)**: Practice with multiple-choice questions in a realistic exam environment
+- **Progress Tracking**: Monitor your performance and improvement over time
+- **Detailed Explanations**: Access comprehensive explanations for all answers
+- **User Dashboard**: Personalized dashboard to track your learning journey
+- **Performance Analytics**: Detailed insights into your strengths and areas for improvement
+- **Test Hosting**: Create and manage custom tests
+- **User Account Management**: Secure user registration and authentication
 
-## Installation Instructions
-To run **PrepMate** locally, follow these steps:
+## Tech Stack
+
+- **Frontend**: React, Tailwind CSS
+- **Backend**: [Backend technology - please specify]
+- **Database**: [Database technology - please specify]
+
+## Project Structure
+
+```
+PrepMate/
+├── frontend/          # React frontend application
+├── backend/           # Backend API server
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (version 14 or higher)
+- npm or yarn
+
+## Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/oluwaseyipd/PrepMate.git
-   ```
-2. Navigate to the project folder:
-   ```bash
-   cd PrepMate
-   ```
-3. Install the dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm start
-   ```
+```bash
+git clone https://github.com/oluwaseyipd/PrepMate.git
+cd PrepMate
+```
 
-The app should now be running on `http://localhost:3000`.
+2. Install frontend dependencies:
+```bash
+cd frontend
+npm install
+```
+
+3. Install backend dependencies:
+```bash
+cd ../backend
+npm install
+```
+
+4. Set up environment variables:
+```bash
+# Create .env files in both frontend and backend directories
+# Add your environment variables (database URLs, API keys, etc.)
+```
 
 ## Usage
-Once you have the app running locally, you can:
-- Sign up for a new account or log in if you already have one
-- Start practicing with available tests
-- View your test results and analytics on your dashboard
 
-## Contributing
-Feel free to fork the project and submit pull requests. For any contributions, please ensure that you:
-- Follow the code style used in the project
-- Write meaningful commit messages
-- Test your changes thoroughly before submitting
+### Development Mode
+
+1. Start the backend server:
+```bash
+cd backend
+npm run dev
+```
+
+2. Start the frontend development server:
+```bash
+cd frontend
+npm start
+```
+
+3. Open your browser and navigate to `http://localhost:5174`
+
+### Production Build
+
+1. Build the frontend:
+```bash
+cd frontend
+npm run build
+```
+
+2. Start the production server:
+```bash
+cd backend
+npm run start
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+# Frontend tests
+cd frontend
+npm test
+
+# Backend tests
+cd backend
+npm test
+```
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/oluwaseyipd/PrepMate/blob/main/LICENSE) file for details.
+
+
+**PrepMate** - Empowering students to excel in their exams through effective preparation and practice.
