@@ -1,39 +1,76 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Bell, Menu, Search, ChevronDown, LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Bell, Menu, Search, Settings, Key, LogOut, Bell as NotificationIcon } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import user1 from '../../assets/images/user1.jpeg';
 
 const Header = ({ toggleSidebar }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hasNotifications, setHasNotifications] = useState(true);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+  
+  // CSS for the shaking animation
+  const bellShakeStyle = hasNotifications ? {
+    animation: 'bellShake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+    animationIterationCount: '1',
+    transform: 'translate3d(0, 0, 0)',
+    backfaceVisibility: 'hidden',
+    perspective: '1000px'
+  } : {};
+
+  // Add the animation keyframes to the document
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes bellShake {
+        0% { transform: rotate(0); }
+        15% { transform: rotate(5deg); }
+        30% { transform: rotate(-5deg); }
+        45% { transform: rotate(4deg); }
+        60% { transform: rotate(-4deg); }
+        75% { transform: rotate(2deg); }
+        85% { transform: rotate(-2deg); }
+        92% { transform: rotate(1deg); }
+        100% { transform: rotate(0); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
+        setShowProfileDropdown(false);
       }
     };
-
+    
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
-  const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
-
-  const closeDropdown = () => setIsDropdownOpen(false);
+  const handleLogout = () => {
+    // Add your logout logic here
+    // For example:
+    // localStorage.removeItem('token');
+    navigate('/signin');
+  };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between sticky top-0">
+    <header className="bg-white shadow-sm border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-50">
       {/* Hamburger Icon for Mobile */}
       <button className="md:hidden" onClick={toggleSidebar}>
         <Menu size={24} className="text-gray-700" />
       </button>
 
       {/* Search Bar (Only on Desktop) */}
-      <div className="hidden md:flex items-center w-full max-w-md bg-blue-50 rounded-full px-2 sticky top-0 z-50">
+      <div className="hidden md:flex items-center w-full max-w-md bg-blue-50 rounded-full p-2 sticky top-0 z-50">
         <Search size={20} className="text-gray-700 mr-2" />
         <input
           type="text"
@@ -44,64 +81,85 @@ const Header = ({ toggleSidebar }) => {
 
       {/* Notification + User Avatar */}
       <div className="flex items-center gap-6">
-        <Link to="/dashboard/settings?section=notification">
-          <div className="relative cursor-pointer">
-            <Bell size={24} className="text-gray-700" />
-            <span className="bg-red-500 text-white text-xs rounded-full px-2 absolute -top-1 -right-2">
-              3
-            </span>
-          </div>
-        </Link>
+        <div className="relative cursor-pointer">
+          <Bell 
+            size={24} 
+            className="text-gray-700" 
+            style={bellShakeStyle} 
+          />
+          {hasNotifications && (
+            <span className="bg-red-500 w-2.5 h-2.5 rounded-full absolute -top-0.5 -right-0.5"></span>
+          )}
+        </div>
 
         {/* Avatar with Dropdown */}
-        <div className='relative' ref={dropdownRef}>
-          <div
-            onClick={toggleDropdown}
-            className='flex items-center gap-4 cursor-pointer border border-gray-200 rounded-full p-1 px-2'
+        <div className="relative" ref={dropdownRef}>
+          <div 
+            className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden border-2 border-blue-500 cursor-pointer"
+            onClick={() => setShowProfileDropdown(!showProfileDropdown)}
           >
-            <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden border border-gray-200">
-              <img
-                src={user1}
-                alt="User Avatar"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <ChevronDown size={18} className="text-gray-700" />
+            <img
+              src={user1}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
           </div>
-
-          {/* Dropdown Menu */}
-          {isDropdownOpen && (
-            <div className='flex flex-col absolute gap-3 right-0 mt-2 w-80 bg-white shadow-lg rounded-lg z-50'>
-              <div className='flex p-2 items-center gap-2 hover:bg-blue-100 text-black rounded-t border-b border-gray-200'>
-                <div className="w-16 h-16 bg-gray-300 rounded-full overflow-hidden border border-gray-200">
-                  <img
-                    src={user1}
-                    alt="User Avatar"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className='ml-2'>
-                  <h3 className='text-lg font-semibold'>John Doe</h3>
-                  <p className='text-sm text-gray-500'>johndoe@gmail.com</p>
+          
+          {/* Profile Dropdown */}
+          {showProfileDropdown && (
+            <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 z-[1000] border border-gray-200 animate-fade-in-down">
+              {/* User Info Section */}
+              <div className="px-4 py-3 border-b border-gray-100">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 rounded-full overflow-hidden mr-3">
+                    <img src={user1} alt="User" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-800">John Doe</p>
+                    <p className="text-sm text-gray-500">john.doe@example.com</p>
+                  </div>
                 </div>
               </div>
-
-              <div className='flex flex-col border-b border-gray-200'>
-                <Link to="/dashboard/settings?section=account" onClick={closeDropdown} className="p-2 hover:bg-blue-100 text-gray-700 rounded-t">
+              
+              {/* Menu Items */}
+              <div className="py-1">
+                <Link 
+                  to="/dashboard/settings" 
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                  onClick={() => setShowProfileDropdown(false)}
+                >
+                  <Settings size={16} className="mr-3" />
                   Account Settings
                 </Link>
-                <Link to="/dashboard/settings?section=notification" onClick={closeDropdown} className="p-2 hover:bg-blue-100 text-gray-700">
-                  Notification Settings
+                
+                <Link 
+                   to="/dashboard/settings"
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                  onClick={() => setShowProfileDropdown(false)}
+                >
+                  <Key size={16} className="mr-3" />
+                  Reset Password
                 </Link>
-                <Link to="/dashboard/settings?section=privacy" onClick={closeDropdown} className="p-2 hover:bg-blue-100 text-gray-700 rounded-b">
-                  Privacy Settings
+                
+                <Link 
+                  to="/dashboard/settings?section=notification" 
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                  onClick={() => setShowProfileDropdown(false)}
+                >
+                  <NotificationIcon size={16} className="mr-3" />
+                  Notifications
                 </Link>
+                
+                <div className="border-t border-gray-100 my-1"></div>
+                
+                <button 
+                  onClick={handleLogout}
+                  className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                >
+                  <LogOut size={16} className="mr-3" />
+                  Sign Out
+                </button>
               </div>
-
-              <Link to="/signin" onClick={closeDropdown} className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded w-full text-left">
-                <LogOut size={20} className='text-red-600' />
-                <span className="block text-gray-700">Sign Out</span>
-              </Link>
             </div>
           )}
         </div>

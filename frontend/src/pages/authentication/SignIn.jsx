@@ -10,9 +10,10 @@ import {
 } from "react-icons/fa6";
 import logo from "../../assets/images/logo.png";
 import signin from "../../assets/images/signin.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     emailOrUsername: "",
     password: "",
@@ -140,8 +141,24 @@ const Signin = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       console.log("Form submitted:", formData);
-      // Handle successful login here
-      alert("Login successful!");
+      
+      // Simulate checking credentials
+      const email = formData.emailOrUsername;
+      let role = "user";
+
+      if (email === "admin@prepmate.com") role = "admin";
+      if (email === "superadmin@prepmate.com") role = "superadmin";
+
+      localStorage.setItem("role", role);
+      
+      // Navigate based on role
+      if (role === "admin") {
+        navigate("/dashboard/admin/dashboard");
+      } else if (role === "superadmin") {
+        navigate("/dashboard/superadmin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Login error:", error);
       setErrors({ submit: "Login failed. Please try again." });
@@ -154,6 +171,19 @@ const Signin = () => {
     console.log(`Login with ${provider}`);
     // Handle social login here
   };
+
+const handleDemoLogin = (role) => {
+  localStorage.setItem("role", role);
+  
+  // Navigate based on role using React Router
+  if (role === "admin") {
+    navigate("/admin/dashboard");  // ← Changed to absolute path
+  } else if (role === "superadmin") {
+    navigate("/superadmin/dashboard");  // ← Changed to absolute path
+  } else {
+    navigate("/dashboard");
+  }
+};
 
   return (
     <div className="flex h-screen">
@@ -176,7 +206,7 @@ const Signin = () => {
           Please sign in to your account and start the adventure
         </p>
 
-        <form className="w-full max-w-sm">
+        <form className="w-full max-w-sm" onSubmit={handleSubmit}>
           {/* Email or Username Field */}
           <div className="mb-4">
             <label className="block text-gray-700 mb-1">
@@ -270,13 +300,9 @@ const Signin = () => {
                 Remember Me
               </label>
             </div>
-            <button
-              type="button"
-              className="text-blue-600 hover:text-blue-700"
-            >
-              <Link to='/forgot-password'> Forgot Password?</Link>
-             
-            </button>
+            <Link to="/forgot-password" className="text-blue-600 hover:text-blue-700">
+              Forgot Password?
+            </Link>
           </div>
 
           {/* Submit Error */}
@@ -300,11 +326,50 @@ const Signin = () => {
           </button>
         </form>
 
+        {/* Demo Buttons */}
+        <div className="flex flex-col md:flex-row gap-4 mt-6">
+          <button
+            className={`w-full py-3 rounded-lg text-white font-medium transition ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 cursor-pointer"
+            }`}
+            onClick={() => handleDemoLogin("user")}
+            disabled={isSubmitting}
+          >
+            Login as User
+          </button>
+
+          <button
+            className={`w-full py-3 rounded-lg text-white font-medium transition ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700 cursor-pointer"
+            }`}
+            onClick={() => handleDemoLogin("admin")}
+            disabled={isSubmitting}
+          >
+            Login as Admin
+          </button>
+
+          <button
+            className={`w-full py-3 rounded-lg text-white font-medium transition ${
+              isSubmitting
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-red-600 hover:bg-red-700 cursor-pointer"
+            }`}
+            onClick={() => handleDemoLogin("superadmin")}
+            disabled={isSubmitting}
+          >
+            Login as Super Admin
+          </button>
+        </div>
+
         <p className="mt-4 text-black">
           New on our platform?{" "}
-          <button className="text-blue-600 hover:text-blue-700">
-            <Link to="/register"> Create an account</Link>
-          </button>
+          <Link to="/register" className="text-blue-600 hover:text-blue-700">
+            Create an account
+          </Link>
         </p>
 
         <div className="mt-4 flex items-center w-full max-w-sm">
