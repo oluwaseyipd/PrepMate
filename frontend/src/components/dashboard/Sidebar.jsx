@@ -8,11 +8,21 @@ import logo from '../../assets/images/logo.png';
 const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
   const sidebarRef = useRef(null);
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
-  const { role } = useAuth();
+  const { role, user, isAuthenticated } = useAuth(); // Get more context
   const location = useLocation();
+  
+  // Enhanced debugging
+  console.log('=== SIDEBAR DEBUG ===');
+  console.log('Current role:', role);
+  console.log('User object:', user);
+  console.log('Is authenticated:', isAuthenticated);
+  console.log('Available roles in NAV_CONFIG:', Object.keys(NAV_CONFIG));
+  console.log('localStorage user:', localStorage.getItem('user'));
   
   // Get navigation items based on user role
   const navItems = NAV_CONFIG[role] || [];
+  
+
   
   // Debug: Log to see what's happening
   console.log('Current role:', role);
@@ -129,29 +139,6 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
           )
         ))}
       </nav>
-
-      {/* Settings and Logout at bottom */}
-      <div className="border-t border-gray-200 pt-4">
-        <Link 
-          to="/dashboard/settings" 
-          className={getActiveLinkClasses('/dashboard/settings')}
-          onClick={handleNavItemClick}
-        >
-          <FaGear size={20} />
-          <span className="block">Settings</span>
-        </Link>
-        
-        <button 
-          className="flex items-center gap-5 p-3 bg-white hover:bg-red-600 text-gray-600 hover:text-white transition-all duration-300 rounded w-full text-left"
-          onClick={() => {
-            // Add your logout logic here
-            console.log('Logout clicked');
-          }}
-        >
-          <FaRightFromBracket size={20} />
-          <span className="block">Logout</span>
-        </button>
-      </div>
     </aside>
   );
 };

@@ -11,9 +11,12 @@ import {
 import logo from "../../assets/images/logo.png";
 import signin from "../../assets/images/signin.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth"; // Import useAuth hook
 
 const Signin = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login function from context
+  
   const [formData, setFormData] = useState({
     emailOrUsername: "",
     password: "",
@@ -144,18 +147,35 @@ const Signin = () => {
       
       // Simulate checking credentials
       const email = formData.emailOrUsername;
+      const pswd = formData.password;
       let role = "user";
 
-      if (email === "admin@prepmate.com") role = "admin";
-      if (email === "superadmin@prepmate.com") role = "superadmin";
+      if (email === "admin@prepmate.com" && pswd === "password") role = "admin";
+      if (email === "superadmin@prepmate.com" && pswd === "password") role = "superadmin";
 
-      localStorage.setItem("role", role);
-      
+      // Create user object
+      const userData = {
+        email: email,
+        username: email.split('@')[0] || email,
+        role: role,
+        name: role === "admin" ? "Admin User" : role === "superadmin" ? "Super Admin" : "Regular User",
+        id: Date.now(), // Simple ID for demo
+      };
+
+      // Use the login function from context
+      if (login) {
+        login(userData);
+      } else {
+        // Fallback if login function is not available
+        localStorage.setItem("role", role);
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
+
       // Navigate based on role
       if (role === "admin") {
-        navigate("/dashboard/admin/dashboard");
+        navigate("/admin/dashboard");
       } else if (role === "superadmin") {
-        navigate("/dashboard/superadmin/dashboard");
+        navigate("/superadmin/dashboard");
       } else {
         navigate("/dashboard");
       }
@@ -171,20 +191,6 @@ const Signin = () => {
     console.log(`Login with ${provider}`);
     // Handle social login here
   };
-
-const handleDemoLogin = (role) => {
-  localStorage.setItem("role", role);
-  
-  // Navigate based on role using React Router
-  if (role === "admin") {
-    navigate("/admin/dashboard");  // ← Changed to absolute path
-  } else if (role === "superadmin") {
-    navigate("/superadmin/dashboard");  // ← Changed to absolute path
-  } else {
-    navigate("/dashboard");
-  }
-};
-
   return (
     <div className="flex h-screen">
       {/* Left Side with Image */}
@@ -326,44 +332,6 @@ const handleDemoLogin = (role) => {
           </button>
         </form>
 
-        {/* Demo Buttons */}
-        <div className="flex flex-col md:flex-row gap-4 mt-6">
-          <button
-            className={`w-full py-3 rounded-lg text-white font-medium transition ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700 cursor-pointer"
-            }`}
-            onClick={() => handleDemoLogin("user")}
-            disabled={isSubmitting}
-          >
-            Login as User
-          </button>
-
-          <button
-            className={`w-full py-3 rounded-lg text-white font-medium transition ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-700 cursor-pointer"
-            }`}
-            onClick={() => handleDemoLogin("admin")}
-            disabled={isSubmitting}
-          >
-            Login as Admin
-          </button>
-
-          <button
-            className={`w-full py-3 rounded-lg text-white font-medium transition ${
-              isSubmitting
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700 cursor-pointer"
-            }`}
-            onClick={() => handleDemoLogin("superadmin")}
-            disabled={isSubmitting}
-          >
-            Login as Super Admin
-          </button>
-        </div>
 
         <p className="mt-4 text-black">
           New on our platform?{" "}

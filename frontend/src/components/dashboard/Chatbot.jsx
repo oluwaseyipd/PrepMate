@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { FaHeadset, FaRobot, FaChevronDown, FaArrowUp } from "react-icons/fa6";
-import ChatMessage from "./ChatMessage";
+import ChatMessage from "../ChatMessage";
 
 const Chatbot = () => {
     const inputRef = useRef();
