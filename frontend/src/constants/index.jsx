@@ -100,16 +100,6 @@ export const team = [
     role: "Sales Executive",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
   },
-  {
-    name: "Harshita Patel",
-    role: "Co-Founder & CEO",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
-  },
-  {
-    name: "Alexa Kimberly",
-    role: "Lead Designer",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis nobis dolorum, ad aspernatur quisquam nam.",
-  },
 ];
 
 export const features = [

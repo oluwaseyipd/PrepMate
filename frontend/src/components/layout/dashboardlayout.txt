@@ -1,0 +1,60 @@
+import React, { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { ModalManager } from '../modals';
+import { MODAL_TYPES } from '../../constants/modalTypes';
+import { useModal } from '../../context/ModalContext';
+import { useAuth } from '../../hooks/useAuth';
+import { ROLES } from '../../constants/roles';
+import Sidebar from './Sidebar';
+import Header from './Header';
+import Chatbot from './Chatbot';
+
+
+const DashboardLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  const { role } = useAuth();
+  const isUser = role === ROLES.USER;
+  const navigate = useNavigate();
+  const { openModal, closeModal } = useModal();
+
+  // Modal handlers
+  const modalHandlers = {
+    [MODAL_TYPES.SUBMIT_TEST]: {
+      onConfirm: () => {
+        // Handle submit test logic
+        console.log('Test submitted');
+        closeModal(MODAL_TYPES.SUBMIT_TEST);
+        navigate('/dashboard/testsummary');
+      }
+    },
+    [MODAL_TYPES.START_TEST]: {
+      onConfirm: () => {
+        // Handle start test logic
+        console.log('Test started');
+        closeModal(MODAL_TYPES.START_TEST);
+        navigate('/dashboard/testinterface');
+      }
+    },
+    [MODAL_TYPES.CANCEL_TEST]: {
+      onLeave: () => {
+        closeModal(MODAL_TYPES.CANCEL_TEST);
+        navigate(-1);
+      }
+    }
+  };
+
+  return (
+    <div className="relative flex h-screen bg-blue-50">
+      {/* Your existing layout code */}
+      <main className="relative flex-1 p-3 md:p-6 overflow-y-auto h-full">
+        <Outlet />
+      </main>
+
+      {/* Modals */}
+      {/* {isUser && <ModalManager handlers={modalHandlers} />} */}
+    </div>
+  );
+};
+
+export default DashboardLayout;

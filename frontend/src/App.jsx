@@ -35,6 +35,7 @@ import ManageResources from "./pages/adminDashboard/ManageResources";
 import ManageTests from "./pages/adminDashboard/ManageTests";
 import ManageUsers from "./pages/adminDashboard/ManageUsers";
 import CreateTest from "./pages/adminDashboard/CreateTest";
+import UploadNewResource from "./pages/adminDashboard/UploadNewResource";
 
 // Super Admin Pages (you'll need to create these)
 import SuperAdminDashboard from "./pages/superAdminDashboard/SuperAdminDashboard";
@@ -42,7 +43,7 @@ import SuperAdminAnalytics from "./pages/superAdminDashboard/SuperAdminAnalytics
 // Add other super admin pages as needed
 
 // Shared Layout
-import DashboardLayout from "./components/dashboard/DashboardLayout";
+import DashboardLayout from "./components/layout/DashboardLayout";
 import AccountSettings from "./pages/userDashboard/AccountSettings";
 
 // Misc
@@ -127,6 +128,8 @@ function App() {
                   <Route path="managetests" element={<ManageTests />} />
                   <Route path="manageusers" element={<ManageUsers />} />
                   <Route path="createtest" element={<CreateTest />} />
+                  <Route path="uploadresource" element={<UploadNewResource />} />
+                  {/* Add other admin routes as needed */}
                 </Route>
 
                 {/* Super Admin Dashboard Routes */}
